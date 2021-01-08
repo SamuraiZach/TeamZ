@@ -1,21 +1,31 @@
 ***REMOVED***
-	TOKEN: '',		// Bot token here
-	CLIENT_ID: '',	// Client ID here
-	NAME: 'Sage'	// Bot Name
+	TOKEN: '',					// Bot token here
+	CLIENT_ID: '',				// Client ID here
+	NAME: 'Sage'				// Bot Name
 ***REMOVED***
 
 export const PREFIX = 's;';
 
-export const MONGO = 'mongodb+srv://DevTest:YouDee4Admin@testsage.69pl9.mongodb.net/TestSage?retryWrites=true&w=majority';	// Mongo connection string here
+export const MONGO = '';		// Mongo connection string here
 
-export const GUILDS = {
+***REMOVED***
 	GATEWAY: '',
 	MAIN: ''
 ***REMOVED***
 
-export const ROLES = {		// Role IDS for each role
+***REMOVED***
 	ADMIN: '',
 	STAFF: '',
 	VERIFIED: '',
 	MUTED: ''
 ***REMOVED***
+
+***REMOVED***
+	SENDER: '',					// The email address all emails should be sent from
+	REPLY_TO: '',				// The replyto address for all emails
+	REPORT_ADRESSES: [			// A list of all the email address to get the weekly report
+		''
+***REMOVED***
+***REMOVED***
+
+export const MAINTAINERS = '';	// The current maintainers of this bot
