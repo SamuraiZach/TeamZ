@@ -9,8 +9,9 @@ export const PREFIX = 's;';
 export const MONGO = '';		// Mongo connection string here
 
 ***REMOVED***
+	MAIN: '',
 	GATEWAY: '',
-	MAIN: ''
+	GATEWAY_INVITE: ''
 ***REMOVED***
 
 ***REMOVED***
