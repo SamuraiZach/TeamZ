@@ -6,7 +6,14 @@
 
 export const PREFIX = 's;';
 
-export const MONGO = '';		// Mongo connection string here
+***REMOVED***
+	CONNECTION: '', 			// Mongo connection string here
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+	COURSES: 'courses'
+***REMOVED***
 
 ***REMOVED***
 	MAIN: '',
