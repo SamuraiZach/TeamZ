@@ -27,7 +27,8 @@ export const PREFIX = 's;';
 	ADMIN: '',
 	STAFF: '',
 	VERIFIED: '',
-	MUTED: ''
+	MUTED: '',
+	LEVEL_ONE: ''
 ***REMOVED***
 
 ***REMOVED***
