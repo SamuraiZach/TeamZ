@@ -38,4 +38,11 @@ export const PREFIX = 's;';
 ***REMOVED***
 ***REMOVED***
 
+export const LOG = {			// Channel IDs for the various logs
+	ERROR: '',
+	SERVER: '',
+	MEMBER: '',
+	MOD: ''
+***REMOVED***
+
 export const MAINTAINERS = '';	// The current maintainers of this bot
