@@ -16,6 +16,8 @@ export const PREFIX = 's;';
 ***REMOVED***
 
 ***REMOVED***
+
+***REMOVED***
 	MAIN: '',
 	GATEWAY: '',
 	GATEWAY_INVITE: ''
@@ -25,7 +27,8 @@ export const PREFIX = 's;';
 	ADMIN: '',
 	STAFF: '',
 	VERIFIED: '',
-	MUTED: ''
+	MUTED: '',
+	LEVEL_ONE: ''
 ***REMOVED***
 
 ***REMOVED***
