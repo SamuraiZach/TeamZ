@@ -14,7 +14,8 @@ export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-	COURSES: 'courses'
+***REMOVED***
+	REMINDERS: 'reminders'
 ***REMOVED***
 
 ***REMOVED***
