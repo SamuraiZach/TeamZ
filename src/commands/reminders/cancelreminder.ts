@@ -2,7 +2,10 @@ import { Reminder } from '@lib/types/Reminder';
 import { DB } from '@root/config';
 import { Message } from 'discord.js';
 
-export const aliases = ['cr'***REMOVED***
+export const description = 'Cancel any pending reminders you may have.';
+export const usage = '<reminder number>';
+export const extendedHelp = 'You can only cancel one reminder at a time';
+export const aliases = ['cr', 'removereminder'***REMOVED***
 
 export function run(msg: Message, [reminder]: [Reminder]): Promise<Message> {
 	msg.client.mongo.collection(DB.REMINDERS).findOneAndDelete(reminder);
