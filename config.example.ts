@@ -42,6 +42,8 @@ export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
 ***REMOVED***
 ***REMOVED***
 
+***REMOVED***
+
 export const CHANNELS = {			// Channel IDs
 	ERROR_LOG: '',
 	SERVER_LOG: '',
