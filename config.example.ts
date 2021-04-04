@@ -4,10 +4,6 @@
 	NAME: 'Sage'				// Bot Name
 ***REMOVED***
 
-export const PREFIX = 's;';
-export const MAINTAINERS = '';	// The current maintainers of this bot
-export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
-
 ***REMOVED***
 	CONNECTION: '', 			// Mongo connection string here
 ***REMOVED***
@@ -16,8 +12,6 @@ export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
 ***REMOVED***
 ***REMOVED***
 	REMINDERS: 'reminders'
-***REMOVED***
-
 ***REMOVED***
 
 ***REMOVED***
@@ -42,8 +36,6 @@ export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
 ***REMOVED***
 ***REMOVED***
 
-***REMOVED***
-
 export const CHANNELS = {			// Channel IDs
 	ERROR_LOG: '',
 	SERVER_LOG: '',
@@ -55,4 +47,9 @@ export const CHANNELS = {			// Channel IDs
 	ARCHIVE: ''
 ***REMOVED***
 
+***REMOVED***
+***REMOVED***
+export const PREFIX = 's;';
+export const MAINTAINERS = '';	// The current maintainers of this bot
+export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
 export const BLACKLIST = [***REMOVED***
