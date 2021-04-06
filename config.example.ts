@@ -11,7 +11,8 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-	REMINDERS: 'reminders'
+***REMOVED***
+	CLIENT_DATA: 'clientData'
 ***REMOVED***
 
 ***REMOVED***
