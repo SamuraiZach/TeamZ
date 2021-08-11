@@ -1,35 +1,40 @@
 import { BOT } from '@root/config';
 import { Message } from 'discord.js';
+import { Command } from '@lib/types/Command';
 
-export const description = `The ultimate battle of human vs program. Can you best ${BOT.NAME} in a round of rock paper scissors?`;
-export const usage = '<rock|paper|scissors>';
-export const aliases = ['rps'***REMOVED***
-const choices = ['rock', 'paper', 'scissors'***REMOVED***
+export default class extends Command {
 
-export function run(msg: Message, [choice]: [string]): Promise<Message> {
-	const botMove = choices[Math.floor(Math.random() * choices.length)***REMOVED***
+	description = `The ultimate battle of human vs program. Can you best ${BOT.NAME} in a round of rock paper scissors?`;
+	usage = '<rock|paper|scissors>';
+	aliases = ['rps'***REMOVED***
+	choices = ['rock', 'paper', 'scissors'***REMOVED***
 
-	const winner = checkWinner(choices.indexOf(choice), choices.indexOf(botMove));
+	run(msg: Message, [choice]: [string]): Promise<Message> {
+		const botMove = this.choices[Math.floor(Math.random() * this.choices.length)***REMOVED***
 
-	return msg.channel.send(`You threw ${choice} and ${BOT.NAME} threw ${botMove}. ${winner} won!`);
-}
+		const winner = this.checkWinner(this.choices.indexOf(choice), this.choices.indexOf(botMove));
 
-function checkWinner(playerNum: number, botNum: number): string {
-	if (playerNum === botNum) return 'Nobody';
-	if ((playerNum > botNum && playerNum - botNum === 1) || (botNum > playerNum && botNum - playerNum === 2)) {
-		return 'You';
-	} else {
-		return BOT.NAME;
-	}
-}
-
-
-export function argParser(msg: Message, input: string): [string] {
-	input = input.trim().toLowerCase();
-
-	if (!input || !choices.includes(input)) {
-		throw `Usage: ${usage}`;
+		return msg.channel.send(`You threw ${choice} and ${BOT.NAME} threw ${botMove}. ${winner} won!`);
 	}
 
-	return [input***REMOVED***
+	checkWinner(playerNum: number, botNum: number): string {
+		if (playerNum === botNum) return 'Nobody';
+		if ((playerNum > botNum && playerNum - botNum === 1) || (botNum > playerNum && botNum - playerNum === 2)) {
+			return 'You';
+		} else {
+			return BOT.NAME;
+		}
+	}
+
+
+	argParser(msg: Message, input: string): [string] {
+		input = input.trim().toLowerCase();
+
+		if (!input || !this.choices.includes(input)) {
+			throw `Usage: ${this.usage}`;
+		}
+
+		return [input***REMOVED***
+	}
+
 }
