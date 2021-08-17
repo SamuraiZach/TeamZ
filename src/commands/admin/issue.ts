@@ -48,7 +48,7 @@ export default class extends Command {
 
 		const splitArgs = args.map(arg => arg.trim());
 
-		let project = 'bot';
+		let project = 'SageV2';
 		let labels = [***REMOVED***
 		let milestone = '';
 
