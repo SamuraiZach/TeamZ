@@ -21,7 +21,8 @@ const BOT_INTENTS = [
 ***REMOVED***
 
 const BOT_PARTIALS: PartialTypes[] = [
-	'CHANNEL'
+	'CHANNEL',
+	'MESSAGE'
 ***REMOVED***
 
 consoleStamp(console, {
