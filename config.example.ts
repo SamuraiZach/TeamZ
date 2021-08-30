@@ -49,6 +49,14 @@ export const CHANNELS = {			// Channel IDs
 ***REMOVED***
 
 ***REMOVED***
+	'',
+	'',
+	'',
+	'',
+	''
+***REMOVED***
+
+***REMOVED***
 ***REMOVED***
 export const PREFIX = 's;';
 export const MAINTAINERS = '';	// The current maintainers of this bot
