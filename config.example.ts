@@ -59,6 +59,7 @@ export const CHANNELS = {			// Channel IDs
 
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
 export const PREFIX = 's;';
 export const MAINTAINERS = '';	// The current maintainers of this bot
 export const SEMESTER_ID = '';	// The current semester ID. i.e. s21
