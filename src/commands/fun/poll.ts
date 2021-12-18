@@ -52,21 +52,19 @@ export default class extends Command {
 				if (reaction.users.cache.size > maxVotes) maxVotes = reaction.users.cache.size;
 			});
 
-			pollEmbed.fields = [{
-				name: 'Question',
-				value: question,
-				inline: false
-			},
-			{
-				name: 'Choices',
-				value: choiceText
-					.split('\n')
-					.map((choice, idx) => {
-						const votes = reactions.get(emotes[idx]).count - 1;
-						return `${choice} - ${votes} vote${votes === 1 ? '' : 's'}`;
-					}).join('\n'),
-				inline: false
-			}***REMOVED***
+			pollEmbed.fields = [
+				{ name: 'Question', value: question, inline: false },
+				{
+					name: 'Choices',
+					value: choiceText
+						.split('\n')
+						.map((choice, idx) => {
+							const votes = reactions.get(emotes[idx]).count - 1;
+							return `${choice} - ${votes} vote${votes === 1 ? '' : 's'}`;
+						}).join('\n'),
+					inline: false
+				}
+		***REMOVED***;
 
 			if (maxVotes <= 1) {
 				pollMsg.edit({ embeds: [pollEmbed
