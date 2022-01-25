@@ -9,9 +9,7 @@ export default class extends Command {
 
 	description = `Sets ${BOT.NAME}'s activity to the given status and content`;
 	usage = '<status>|<content>';
-	aliases = ['setactivity', 'act'***REMOVED***
 	tempPermissions: ApplicationCommandPermissionData[] = [BOTMASTER_PERMS***REMOVED***
-	//	botmaster perms
 
 	options: ApplicationCommandOptionData[] = [
 		{
