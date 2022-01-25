@@ -11,7 +11,6 @@ export default class extends Command {
 	'add all course roles, and add the course to the database. ';
 	usage = '<course ID>';
 	runInDM = false;
-	aliases = ['addc', 'createcourse', 'createc'***REMOVED***
 	tempPermissions: ApplicationCommandPermissionData[] = [ADMIN_PERMS***REMOVED***
 
 	options: ApplicationCommandOptionData[] = [{
