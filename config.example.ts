@@ -53,8 +53,8 @@ export const MONGO = '';
 ***REMOVED***
 
 ***REMOVED***
-	COURSE_ROLES: '', // course roles
-	ASSIGN_ROLES: '' // assign roles
+	COURSE_ROLES: '',
+	ASSIGN_ROLES: ''
 ***REMOVED***
 
 ***REMOVED***
