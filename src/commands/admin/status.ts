@@ -7,7 +7,7 @@ const STATUSES = ['online', 'idle', 'dnd', 'invisible'***REMOVED***
 export default class extends Command {
 
 	description = `Sets ${BOT.NAME}'s status.`;
-	tempPermissions: ApplicationCommandPermissionData[] = [BOTMASTER_PERMS***REMOVED***
+	tempPermissions: ApplicationCommandPermissionData[] = BOTMASTER_PERMS;
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'status',

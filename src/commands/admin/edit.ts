@@ -7,7 +7,7 @@ export default class extends Command {
 
 	description = `Edits a message sent by ${BOT.NAME}.`;
 	usage = '<messageLink>|<content>';
-	tempPermissions: ApplicationCommandPermissionData[] = [BOTMASTER_PERMS***REMOVED***
+	tempPermissions: ApplicationCommandPermissionData[] = BOTMASTER_PERMS;
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'msg_link',
