@@ -4,6 +4,8 @@
 	NAME: 'Sage'				// Bot Name
 ***REMOVED***
 
+export const MONGO = '';
+
 ***REMOVED***
 	CONNECTION: '', 			// Mongo connection string here
 ***REMOVED***
@@ -38,7 +40,7 @@
 ***REMOVED***
 ***REMOVED***
 
-export const CHANNELS = {			// Channel IDs
+***REMOVED***
 	ERROR_LOG: '',
 	SERVER_LOG: '',
 	MEMBER_LOG: '',
@@ -46,7 +48,13 @@ export const CHANNELS = {			// Channel IDs
 	FEEDBACK: '',
 	SAGE: '',
 	ANNOUNCEMENTS: '',
-	ARCHIVE: ''
+	ARCHIVE: '',
+	ROLE_SELECT: ''
+***REMOVED***
+
+***REMOVED***
+	COURSE_ROLES: '', // course roles
+	ASSIGN_ROLES: '' // assign roles
 ***REMOVED***
 
 ***REMOVED***
