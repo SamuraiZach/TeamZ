@@ -34,5 +34,6 @@
 ***REMOVED***,
 	"search.exclude": {
 		"**/node_modules": false
-	}
+	},
+	"discord.enabled": false
 }
