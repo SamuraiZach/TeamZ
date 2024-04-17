@@ -24,8 +24,8 @@ export default class extends Command {
 			.setFooter({ text: `This command will expire in ${PRUNE_TIMEOUT}s` });
 
 		const confirmBtns = [
-			new MessageButton({ label: 'Cancel', customId: 'cancel', style: 'SECONDARY' }),
-			new MessageButton({ label: 'Proceed', customId: 'proceed', style: 'DANGER' })
+			new MessageButton({ label: 'Cancel', customId: 'cancel', style: 'SECONDARY', type: 'BUTTON' }),
+			new MessageButton({ label: 'Proceed', customId: 'proceed', style: 'DANGER', type: 'BUTTON' })
 	***REMOVED***;
 
 		const confirmMsg = await interaction.channel.send({

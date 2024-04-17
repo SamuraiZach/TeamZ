@@ -22,9 +22,9 @@ export default class extends Command {
 
 		let comic: XkcdComic;
 
-		const prevButton = new MessageButton({ label: 'Previous Comic', customId: 'previous', style: 'SECONDARY', emoji: '◀' });
-		const randButton = new MessageButton({ label: 'Random', customId: 'rand', style: 'SECONDARY', emoji: '🔀' });
-		const nextButton = new MessageButton({ label: 'Next Comic', customId: 'next', style: 'SECONDARY', emoji: '▶' });
+		const prevButton = new MessageButton({ label: 'Previous Comic', customId: 'previous', style: 'SECONDARY', emoji: '◀', type: 'BUTTON' });
+		const randButton = new MessageButton({ label: 'Random', customId: 'rand', style: 'SECONDARY', emoji: '🔀', type: 'BUTTON' });
+		const nextButton = new MessageButton({ label: 'Next Comic', customId: 'next', style: 'SECONDARY', emoji: '▶', type: 'BUTTON' });
 		let comicNum = 0;
 
 		if (comicChoice.toLowerCase() === 'random') {

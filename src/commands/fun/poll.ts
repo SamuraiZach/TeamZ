@@ -108,13 +108,15 @@ export default class extends Command {
 				choiceBtns.push(new MessageButton({ label: `${choice}`,
 					customId: `${SageInteractionType.POLL}_${choice}`,
 					style: 'SECONDARY',
-					emoji: `${emotes[index]}` }));
+					emoji: `${emotes[index]}`,
+					type: 'BUTTON' }));
 			} else {
 				choiceBtns2.push(new MessageButton({
 					label: `${choice}`,
 					customId: `${SageInteractionType.POLL}_${choice}`,
 					style: 'SECONDARY',
-					emoji: `${emotes[index]}`
+					emoji: `${emotes[index]}`,
+					type: 'BUTTON'
 				}));
 			}
 		});
@@ -183,7 +185,8 @@ export async function handlePollOptionSelect(bot: Client, i: ButtonInteraction):
 			label: `${key}`,
 			customId: `${SageInteractionType.POLL}_${key}`,
 			style: 'SECONDARY',
-			emoji: `${emotes[count++]}`
+			emoji: `${emotes[count++]}`,
+			type: 'BUTTON'
 		}));
 	});
 

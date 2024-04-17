@@ -36,8 +36,8 @@ export default class extends Command {
 		`${interaction.user.tag}\` \`(${interaction.user.id})\``;
 
 		const confirmBtns = [
-			new MessageButton({ label: 'Yes', customId: 'y', style: 'SECONDARY' }),
-			new MessageButton({ label: 'No', customId: 'n', style: 'DANGER' })
+			new MessageButton({ label: 'Yes', customId: 'y', style: 'SECONDARY', type: 'BUTTON' }),
+			new MessageButton({ label: 'No', customId: 'n', style: 'DANGER', type: 'BUTTON' })
 	***REMOVED***;
 
 		//	a warning gets issued for this command

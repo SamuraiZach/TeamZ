@@ -27,7 +27,8 @@ export default class extends Command {
 					additionalData: ['rock', `${timer[Symbol.toPrimitive]()}`]
 				}),
 				style: 'PRIMARY',
-				emoji: '👊'
+				emoji: '👊',
+				type: 'BUTTON'
 			}),
 			new MessageButton({
 				label: 'Paper',
@@ -37,7 +38,8 @@ export default class extends Command {
 					additionalData: ['paper', `${timer[Symbol.toPrimitive]()}`]
 				}),
 				style: 'PRIMARY',
-				emoji: '✋'
+				emoji: '✋',
+				type: 'BUTTON'
 			}),
 			new MessageButton({
 				label: 'Scissors',
@@ -47,7 +49,8 @@ export default class extends Command {
 					additionalData: ['scissors', `${timer[Symbol.toPrimitive]()}`]
 				}),
 				style: 'PRIMARY',
-				emoji: '✌'
+				emoji: '✌',
+				type: 'BUTTON'
 			})
 	***REMOVED***;
 
