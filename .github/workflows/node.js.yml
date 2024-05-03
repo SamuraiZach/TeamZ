@@ -26,14 +26,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm ci
-          npm install @root/config
+          npm i
 
       - name: Test Build
         run: |
           echo "running build in temp workspace"
-          npm run clean
-          npm i
           npm run build
 
       - name: Lint
