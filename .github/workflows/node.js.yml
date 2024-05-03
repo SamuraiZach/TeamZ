@@ -98,8 +98,8 @@ jobs:
           echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
 
   post:
-    runs-on:
-      - ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
       - name: Send Discord notification for Pipeline
         run: |
           echo "Pipeline ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
