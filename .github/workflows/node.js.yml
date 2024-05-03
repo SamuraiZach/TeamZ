@@ -29,12 +29,9 @@ jobs:
 
       - name: Test Build
         run: |
-          find /tmp -user jenkins -print0 | xargs -0 rm -rf
           echo "running build in temp workspace"
-          mv config.example.ts config.ts
           npm run clean
           npm cache clean --force
-          rm -rf node_modules
           npm i
           npm run build
 
