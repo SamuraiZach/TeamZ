@@ -1,0 +1,110 @@
+name: Sage Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  MAIN_BRANCH: main
+  SAGE_DIR: /usr/local/sage/SageV2
+  JENKINS_NODE_COOKIE: dontKillMe
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test Build
+        run: |
+          find /tmp -user jenkins -print0 | xargs -0 rm -rf
+          echo "running build in temp workspace"
+          mv config.example.ts config.ts
+          npm run clean
+          npm cache clean --force
+          rm -rf node_modules
+          npm i
+          npm run build
+
+      - name: Send Discord notification for Test Build
+        run: |
+          echo "Test build ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
+          echo "Footer: ${{ github.run_id }}"
+          echo "Link: ${{ github.run_url }}"
+          echo "Result: ${{ job.status }}"
+          echo "Title: ${{ github.workflow }} -- Test Build"
+          echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
+
+      - name: Lint
+        run: npm run test
+
+      - name: Send Discord notification for Lint
+        run: |
+          echo "Lint ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
+          echo "Footer: ${{ github.run_id }}"
+          echo "Link: ${{ github.run_url }}"
+          echo "Result: ${{ job.status }}"
+          echo "Title: ${{ github.workflow }} -- Lint"
+          echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
+
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "rebuilding and deploying in prod directory..."
+          cd ${{ env.SAGE_DIR }}
+          git pull
+          npm run clean
+          npm i
+          npm run build
+          sudo /bin/systemctl restart sage
+
+      - name: Send Discord notification for Deploy
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "Deploy ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
+          echo "Footer: ${{ github.run_id }}"
+          echo "Link: ${{ github.run_url }}"
+          echo "Result: ${{ job.status }}"
+          echo "Title: ${{ github.workflow }} -- Deploy"
+          echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
+
+      - name: Update Docs
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "automatically updating the documentation website"
+          cd ${{ env.SAGE_DIR }}
+          npm run autodoc
+
+      - name: Send Discord notification for Documentation Update
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "doc automation ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
+          echo "Footer: ${{ github.run_id }}"
+          echo "Link: ${{ github.run_url }}"
+          echo "Result: ${{ job.status }}"
+          echo "Title: ${{ github.workflow }} -- Documentation Update"
+          echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
+
+  post:
+    runs-on:
+      - ubuntu-latest
+      - name: Send Discord notification for Pipeline
+        run: |
+          echo "Pipeline ${{ job.status }} on branch [${{ github.ref }}](${{ github.event.compare }})"
+          echo "Footer: ${{ github.run_id }}"
+          echo "Link: ${{ github.run_url }}"
+          echo "Result: ${{ job.status }}"
+          echo "Title: ${{ github.workflow }}"
+          echo "Webhook URL: ${{ env.DISCORD_WEBHOOK }}"
