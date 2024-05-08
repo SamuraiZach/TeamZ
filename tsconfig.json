@@ -6,7 +6,7 @@
         "esModuleInterop": true,
         "outDir": "./dist",
         "paths": {
-			"@root/*": ["./*"],
+			"@root/*": ["*"],
 			"@lib/*": ["src/lib/*"],
 			"@pieces/*": ["src/pieces/*"]
         },
@@ -20,6 +20,10 @@
 	***REMOVED***,
         "module": "commonjs"
     },
+	"include": [
+		"src",
+		"types"
+***REMOVED***,
     "exclude": [
         "**/node_modules",
 		"**/node_modules/discord.js/typings/index.d.ts", // problematic in djs versions >13.1
