@@ -38,10 +38,9 @@ jobs:
           echo "running build in temp workspace"
           npm run clean
           npm cache clean --force
-          rm -rf node_modules
+          find . -maxdepth 1 -type d -name 'node_modules' -exec rm -rf {} +
           npm install
           npm run build
-
       - name: Lint
         run: npm run lint
 
