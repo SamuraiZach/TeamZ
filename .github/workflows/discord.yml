@@ -13,5 +13,5 @@ jobs:
       - name: Send Discord Message
         uses: appleboy/discord-action@v1
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           message: "Hello from GitHub Actions!"
