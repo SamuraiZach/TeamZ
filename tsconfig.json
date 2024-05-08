@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "./",
+        "baseUrl": ".",
         "esModuleInterop": true,
         "outDir": "./dist",
         "paths": {
@@ -20,9 +20,6 @@
 	***REMOVED***,
         "module": "commonjs"
     },
-	"include": [
-		"src"
-***REMOVED***,
     "exclude": [
         "**/node_modules",
 		"**/node_modules/discord.js/typings/index.d.ts", // problematic in djs versions >13.1
