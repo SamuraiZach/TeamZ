@@ -30,13 +30,6 @@ jobs:
           url=https://$(echo "${{ github.repository }}" | sed "s/\//.github.io\//")
           echo "url=$url" >> $GITHUB_ENV
 
-      - name: Update package.json homepage
-        uses: jossef/action-set-json-field@v1
-        with:
-          file: package.json
-          field: homepage
-          value: ${{ steps.get-repo-values.outputs.url }}
-
       - name: Install Dependencies
         run: npm ci
 
@@ -46,7 +39,7 @@ jobs:
           npm run clean
           npm cache clean --force
           rm -rf node_modules
-          npm ci
+          npm install
           npm run build
 
       - name: Lint
