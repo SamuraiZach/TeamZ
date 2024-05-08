@@ -10,18 +10,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [16.x]
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+
+      - name: Get Repo Values
+        id: get-repo-values
+        run: |
+          url=https://$(echo "${{ github.repository }}" | sed "s/\//.github.io\//")
+          echo "url=$url" >> $GITHUB_ENV
+
+      - name: Update package.json homepage
+        uses: jossef/action-set-json-field@v1
+        with:
+          file: package.json
+          field: homepage
+          value: ${{ steps.get-repo-values.outputs.url }}
 
       - name: Install Dependencies
-        run: |
-          npm install
+        run: npm ci
 
       - name: Test Build
         run: |
@@ -29,13 +46,20 @@ jobs:
           npm run clean
           npm cache clean --force
           rm -rf node_modules
-          npm install
+          npm ci
           npm run build
 
       - name: Lint
-        run: |
-          echo "testing in temp workspace..."
-          npm run test
+        run: npm run lint
+
+      - name: Test
+        run: npm run test -- --coverage |& tee ./public/test_report.txt
+
+      - name: Create GitHub HTML
+        run: echo "<html><head><meta http-equiv='refresh' content='0; URL=${{ github.server_url }}/${{ github.repository }}' /></head><body>Redirecting to repository</body></html>" > ./public/github.html
+
+      - name: Build (if present)
+        run: npm run build --if-present
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
