@@ -30,6 +30,7 @@
 	"homepage": "https://github.com/ud-cis-discord/SageV2",
 	"dependencies": {
 		"@octokit/rest": "^18.3.5",
+		"@types/config": "^3.3.4",
 		"canvas": "^2.11.2",
 		"console-stamp": "^3.0.2",
 		"discord.js": "^13.17.1",
