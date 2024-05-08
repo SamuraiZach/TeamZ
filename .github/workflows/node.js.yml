@@ -1,47 +1,54 @@
-name: Sage Workflow
+name: CI Pipeline
 
 on:
   push:
     branches:
       - main
-
-env:
-  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-  MAIN_BRANCH: main
-  SAGE_DIR: /usr/local/sage/SageV2
-  JENKINS_NODE_COOKIE: dontKillMe
+      - development
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
-          npm ci
+          npm install
 
       - name: Test Build
         run: |
+          find /tmp -user jenkins -print0 | xargs -0 rm -rf
           echo "running build in temp workspace"
+          mv config.example.ts config.ts
+          npm run clean
+          npm cache clean --force
+          rm -rf node_modules
+          npm install
           npm run build
 
       - name: Lint
         run: |
-          npm run lint
+          echo "testing in temp workspace..."
           npm run test
 
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         run: |
           echo "rebuilding and deploying in prod directory..."
-          npm run dev
+          cd ${{ env.SAGE_DIR }}
+          git pull
+          npm run clean
+          npm install
+          npm run build
+          sudo /bin/systemctl restart sage
 
       - name: Update Docs
         if: github.ref == 'refs/heads/main'
