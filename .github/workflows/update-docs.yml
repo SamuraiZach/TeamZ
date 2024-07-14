@@ -13,11 +13,3 @@ jobs:
         run: |
           cd ${{ env.SAGE_DIR }}
           npm run autodoc
-      - name: Discord Notification
-        uses: Ilshidur/action-discord@master
-        if: always()
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: >
-            Documentation update ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})

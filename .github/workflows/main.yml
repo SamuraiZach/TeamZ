@@ -28,15 +28,3 @@ jobs:
     needs: deploy
     uses: ./.github/workflows/update-docs.yml
     if: github.ref == 'refs/heads/main'
-
-  notify:
-    needs: [test-build, lint, deploy, update-docs]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord Notification
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: >
-            Pipeline ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
