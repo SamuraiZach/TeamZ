@@ -1,0 +1,42 @@
+name: Main Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  MAIN_BRANCH: 'main'
+  SAGE_DIR: '/usr/local/sage/SageV2'
+
+jobs:
+  test-build:
+    uses: ./.github/workflows/test-build.yml
+
+  lint:
+    needs: test-build
+    uses: ./.github/workflows/lint.yml
+
+  deploy:
+    needs: [test-build, lint]
+    uses: ./.github/workflows/deployment.yml
+    if: github.ref == 'refs/heads/main'
+
+  update-docs:
+    needs: deploy
+    uses: ./.github/workflows/update-docs.yml
+    if: github.ref == 'refs/heads/main'
+
+  notify:
+    needs: [test-build, lint, deploy, update-docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord Notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: >
+            Pipeline ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
