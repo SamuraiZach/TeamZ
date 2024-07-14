@@ -1,0 +1,23 @@
+name: Update Docs
+
+on:
+  workflow_call:
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update documentation
+        if: github.ref == 'refs/heads/main'
+        run: |
+          cd ${{ env.SAGE_DIR }}
+          npm run autodoc
+      - name: Discord Notification
+        uses: Ilshidur/action-discord@master
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: >
+            Documentation update ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})

@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/main'
+        run: |
+          cd ${{ env.SAGE_DIR }}
+          git pull
+          npm run clean
+          npm i
+          npm run build
+          sudo /bin/systemctl restart sage
+      - name: Discord Notification
+        uses: Ilshidur/action-discord@master
+        if: always()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: >
+            Deploy ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})

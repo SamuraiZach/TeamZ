@@ -5,7 +5,8 @@ import nodemailer from 'nodemailer';
 import { MongoClient } from 'mongodb';
 import { SageUser } from '@lib/types/SageUser';
 import { Course } from '@lib/types/Course';
-import { BOT, DB, EMAIL, GUILDS, ROLES, FIRST_LEVEL } from '@root/config';
+import { BOT_NAME, DB_CONNECTION, DB_COURSES, DB_USERS, EMAIL_REPLY_TO, EMAIL_SENDER, FIRST_LEVEL, GUILD_GATEWAY_INVITE, ROLE_LEVEL_ONE, ROLE_STAFF } from '@root/secretVariables';
+// import { BOT, DB, EMAIL, GUILDS, ROLES, FIRST_LEVEL } from '@root/config';
 
 const MESSAGE = `<!DOCTYPE html>
 <html>
@@ -39,8 +40,8 @@ const mailer = nodemailer.createTransport({
 });
 
 async function main() {
-	const client = await MongoClient.connect(DB.CONNECTION, { useUnifiedTopology: true });
-	const db = client.db(BOT.NAME).collection(DB.USERS);
+	const client = await MongoClient.connect(DB_CONNECTION, { useUnifiedTopology: true });
+	const db = client.db(BOT_NAME).collection(DB_USERS);
 	const args = process.argv.slice(2);
 	let emails: Array<string>;
 	let course: Course;
@@ -56,7 +57,7 @@ async function main() {
 		emails = data.toString().split('\n').map(email => email.trim());
 		let courseId: string;
 		[emails[0], courseId] = emails[0].split(',').map(str => str.trim());
-		course = await client.db(BOT.NAME).collection(DB.COURSES).findOne({ name: courseId });
+		course = await client.db(BOT_NAME).collection(DB_COURSES).findOne({ name: courseId });
 	}
 
 	let isStaff: boolean;
@@ -90,8 +91,8 @@ async function main() {
 			isStaff: isStaff,
 			discordId: '',
 			count: 0,
-			levelExp: FIRST_LEVEL,
-			curExp: FIRST_LEVEL,
+			levelExp: Number(FIRST_LEVEL),
+			curExp: Number(FIRST_LEVEL),
 			level: 1,
 			levelPings: true,
 			isVerified: false,
@@ -110,9 +111,9 @@ async function main() {
 		}
 
 		if (isStaff) {
-			newUser.roles.push(ROLES.STAFF);
+			newUser.roles.push(ROLE_STAFF);
 		}
-		newUser.roles.push(ROLES.LEVEL_ONE);
+		newUser.roles.push(ROLE_LEVEL_ONE);
 
 		if (entry) {			// User already on-boarded
 			if (isStaff && entry.isVerified) {		// Make staff is not already
@@ -138,11 +139,11 @@ async function main() {
 
 async function sendEmail(email: string, hash: string): Promise<void> {
 	mailer.sendMail({
-		from: EMAIL.SENDER,
-		replyTo: EMAIL.REPLY_TO,
+		from: EMAIL_SENDER,
+		replyTo: EMAIL_REPLY_TO,
 		to: email,
 		subject: 'Welcome to the UD CIS Discord!',
-		html: MESSAGE.replace('$hash', hash).replace('$invCode', GUILDS.GATEWAY_INVITE)
+		html: MESSAGE.replace('$hash', hash).replace('$invCode', GUILD_GATEWAY_INVITE)
 	});
 }
 
