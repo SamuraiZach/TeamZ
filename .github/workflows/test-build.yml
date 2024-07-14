@@ -25,11 +25,3 @@ jobs:
           npm i
       - name: Build
         run: npm run build
-      - name: Discord Notification
-        uses: Ilshidur/action-discord@master
-        if: always()
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: >
-            Test build ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})

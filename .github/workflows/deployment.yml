@@ -17,11 +17,3 @@ jobs:
           npm i
           npm run build
           sudo /bin/systemctl restart sage
-      - name: Discord Notification
-        uses: Ilshidur/action-discord@master
-        if: always()
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: >
-            Deploy ${{ job.status }} on branch [${{ github.ref_name }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
