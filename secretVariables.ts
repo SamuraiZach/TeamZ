@@ -42,3 +42,9 @@ export const { PREFIX } = process.env;
 export const { MAINTAINERS } = process.env;
 export const { SEMESTER_ID } = process.env;
 export const { BLACKLIST } = process.env;
+
+***REMOVED***
+	TOKEN: BOT_TOKEN,
+	CLIENT_ID: BOT_CLIENT_ID,
+	NAME: BOT_NAME
+***REMOVED***
