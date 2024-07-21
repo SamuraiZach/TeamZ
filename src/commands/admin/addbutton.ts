@@ -1,5 +1,5 @@
 import { BOTMASTER_PERMS } from '@lib/permissions';
-import { BOT } from '@root/config';
+import { BOT } from '@root/secretVariables';
 import { Command } from '@lib/types/Command';
 import { ApplicationCommandOptionData, ApplicationCommandPermissionData, CommandInteraction, MessageActionRow, MessageButton, MessageButtonStyle, TextChannel } from 'discord.js';
 
