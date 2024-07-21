@@ -2,8 +2,7 @@ import 'module-alias/register';
 import { MongoClient, ObjectID } from 'mongodb';
 import nodemailer from 'nodemailer';
 import { SageUser } from '@lib/types/SageUser';
-// import { DB, BOT, EMAIL, GUILDS } from '@root/config';
-import { BOT_NAME, DB_CONNECTION, DB_USERS, EMAIL_REPLY_TO, EMAIL_SENDER, GUILD_GATEWAY_INVITE } from '@root/secretVariables';
+import { DB, BOT, EMAIL, GUILDS } from '@root/secretVariables';
 
 const MESSAGE = `<!DOCTYPE html>
 <html>
@@ -39,8 +38,8 @@ const mailer = nodemailer.createTransport({
 });
 
 async function main() {
-	const client = await MongoClient.connect(DB_CONNECTION, { useUnifiedTopology: true });
-	const db = client.db(BOT_NAME).collection(DB_USERS);
+	const client = await MongoClient.connect(DB.CONNECTION, { useUnifiedTopology: true });
+	const db = client.db(BOT.NAME).collection(DB.USERS);
 	const users: Array<DatabaseUser> = await db.find().toArray();
 
 	const args = process.argv.slice(2);
@@ -77,13 +76,13 @@ async function main() {
 
 function sendEmail(user: DatabaseUser) {
 	return mailer.sendMail({
-		from: EMAIL_SENDER,
-		replyTo: EMAIL_REPLY_TO,
+		from: EMAIL.SENDER,
+		replyTo: EMAIL.REPLY_TO,
 		to: user.email,
 		subject: 'Dont forget to verify on the UD CIS Discord.',
 		html: MESSAGE
 			.replace('$hash', user.hash)
-			.replace('$invCode', GUILD_GATEWAY_INVITE)
+			.replace('$invCode', GUILDS.GATEWAY_INVITE)
 			.replace('$timestamp', user._id.getTimestamp().toDateString())
 	});
 }
