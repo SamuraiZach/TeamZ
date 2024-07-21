@@ -21,7 +21,8 @@
         "module": "commonjs"
     },
 	"include": [
-		"config.ts"
+		"config.ts",
+		"src/**/*"
 ***REMOVED***,
     "exclude": [
         "**/node_modules",
