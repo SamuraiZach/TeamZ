@@ -81,9 +81,7 @@ export default class extends Command {
 			.setCustomId(customID)
 			.setStyle(buttonStyle);
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore: you are literally the right type shut up
-		await message.edit({ content: message.content, components: [new ActionRowBuilder({ components: [btn] })] });
+		await message.edit({ content: message.content, components: [new ActionRowBuilder<ButtonBuilder>({ components: [btn] })] });
 		interaction.reply({ content: 'Your message has been given a button', ephemeral: true });
 	}
 
