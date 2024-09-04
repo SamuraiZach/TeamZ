@@ -1,5 +1,4 @@
 # Our Stuff
-config.ts
 resources/*
 !resources/.exists
 src/commands/admin/eval.ts

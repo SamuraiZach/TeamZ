@@ -26,14 +26,9 @@ export default class extends Command {
 					commandOwner: interaction.user.id,
 					additionalData: ['rock', `${timer[Symbol.toPrimitive]()}`]
 				}),
-<<<<<<< HEAD
 				style: 'PRIMARY',
 				emoji: '👊',
 				type: 'BUTTON'
-=======
-				style: ButtonStyle.Primary,
-				emoji: '👊'
->>>>>>> upstream/main
 			}),
 			new ButtonBuilder({
 				label: 'Paper',

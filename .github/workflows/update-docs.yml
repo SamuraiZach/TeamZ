@@ -1,0 +1,15 @@
+name: Update Docs
+
+on:
+  workflow_call:
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update documentation
+        if: github.ref == 'refs/heads/main'
+        run: |
+          cd ${{ env.SAGE_DIR }}
+          npm run autodoc

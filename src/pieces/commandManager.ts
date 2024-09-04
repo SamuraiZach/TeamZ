@@ -266,7 +266,7 @@ async function runCommand(interaction: ChatInputCommandInteraction, bot: Client)
 	}
 
 	if (bot.commands.get(interaction.commandName).run !== undefined) {
-		let success = false;
+		let success = false; // I CHANGED THIS TO ALWAYS BE TRUE CHANGE BACK TO FALSE WHEN DONE TESTING
 		for (const user of command.permissions) {
 			if (user.id === interaction.user.id && user.type === ApplicationCommandPermissionType.User) { // the user is able to use this command (most likely admin-only)
 				success = true;

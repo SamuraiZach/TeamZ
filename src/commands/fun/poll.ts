@@ -108,26 +108,16 @@ export default class extends Command {
 			if (index < 5) {
 				choiceBtns.push(new ButtonBuilder({ label: `${choice}`,
 					customId: `${SageInteractionType.POLL}_${choice}`,
-<<<<<<< HEAD
 					style: 'SECONDARY',
 					emoji: `${emotes[index]}`,
 					type: 'BUTTON' }));
-=======
-					style: ButtonStyle.Secondary,
-					emoji: `${emotes[index]}` }));
->>>>>>> upstream/main
 			} else {
 				choiceBtns2.push(new ButtonBuilder({
 					label: `${choice}`,
 					customId: `${SageInteractionType.POLL}_${choice}`,
-<<<<<<< HEAD
 					style: 'SECONDARY',
 					emoji: `${emotes[index]}`,
 					type: 'BUTTON'
-=======
-					style: ButtonStyle.Secondary,
-					emoji: `${emotes[index]}`
->>>>>>> upstream/main
 				}));
 			}
 		});
