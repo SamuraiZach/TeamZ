@@ -15,8 +15,3 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
-
-  update-docs:
-    needs: lint
-    uses: ./.github/workflows/update-docs.yml
-    if: github.ref == 'refs/heads/main'
