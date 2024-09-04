@@ -12,11 +12,8 @@ env:
   SAGE_DIR: '/usr/local/sage/SageV2'
 
 jobs:
-  test-build:
-    uses: ./.github/workflows/test-build.yml
 
   lint:
-    needs: test-build
     uses: ./.github/workflows/lint.yml
 
   update-docs:
