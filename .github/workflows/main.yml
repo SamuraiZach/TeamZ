@@ -15,3 +15,5 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
+  ci:
+    uses: ./.github/workflows/ci.yml
