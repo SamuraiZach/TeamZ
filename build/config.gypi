@@ -7,7 +7,7 @@
     "include_dirs": [],
     "libraries": [],
     "msbuild_toolset": "v143",
-    "msvs_windows_target_platform_version": "10.0.19041.0"
+    "msvs_windows_target_platform_version": "10.0.22621.0"
   },
   "variables": {
     "asan": 0,
@@ -404,7 +404,6 @@
     "nodedir": "C:\\Users\\avasw\\AppData\\Local\\node-gyp\\Cache\\18.17.1",
     "python": "C:\\Users\\avasw\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
     "standalone_static_library": 1,
-    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
-    "jpeg_root": "C:libjpeg-turbo64"
+    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"
   }
 }
