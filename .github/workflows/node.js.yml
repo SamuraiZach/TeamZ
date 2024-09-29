@@ -5,9 +5,9 @@ name: node
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "Ava-branch" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "Ava-branch" ]
 
 jobs:
   build:
