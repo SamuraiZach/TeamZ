@@ -25,7 +25,7 @@ jobs:
           rm -rf node_modules
           npm install
 
-      - name: Build
+      - name: Build project
         run: npm run build
         continue-on-error: true
 
