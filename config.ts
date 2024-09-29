@@ -192,3 +192,17 @@ export const CHANNELS = {
 	COURSE_ROLES: config.ROLE_DROPDOWNS_COURSE_ROLES,
 	ASSIGN_ROLES: config.ROLE_DROPDOWNS_ASSIGN_ROLES
 ***REMOVED***
+
+export const GITHUB_PROJECT = config.ENV_GITHUB_PROJECT;
+
+// eslint-disable-next-line prefer-destructuring
+export const SEMESTER_ID = config.SEMESTER_ID;
+
+// eslint-disable-next-line prefer-destructuring
+export const FIRST_LEVEL = config.FIRST_LEVEL;
+
+// eslint-disable-next-line prefer-destructuring
+export const LEVEL_TIER_ROLES = config.LEVEL_TIER_ROLES;
+
+// eslint-disable-next-line prefer-destructuring
+export const MAINTAINERS = config.MAINTAINERS;
