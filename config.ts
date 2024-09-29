@@ -198,11 +198,19 @@ export const GITHUB_PROJECT = config.ENV_GITHUB_PROJECT;
 // eslint-disable-next-line prefer-destructuring
 export const SEMESTER_ID = config.SEMESTER_ID;
 
-// eslint-disable-next-line prefer-destructuring
-export const FIRST_LEVEL = config.FIRST_LEVEL;
+***REMOVED***
 
-// eslint-disable-next-line prefer-destructuring
-export const LEVEL_TIER_ROLES = config.LEVEL_TIER_ROLES;
+***REMOVED***config.LEVEL_TIER_ROLES***REMOVED***
 
 // eslint-disable-next-line prefer-destructuring
 export const MAINTAINERS = config.MAINTAINERS;
+
+// eslint-disable-next-line prefer-destructuring
+export const PREFIX = config.PREFIX;
+
+export const BLACKLIST = [config.BLACKLIST***REMOVED***
+
+export const GITHUB_TOKEN = config.ENV_GITHUB_TOKEN;
+
+// eslint-disable-next-line prefer-destructuring
+export const MONGO = config.MONGO;
