@@ -1,0 +1,13 @@
+name: documentation
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: autodoc
+        run: npm run autodoc

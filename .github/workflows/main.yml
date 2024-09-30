@@ -15,3 +15,12 @@ jobs:
 
   node:
     uses: ./.github/workflows/node.js.yml
+
+  #documentation step would go here but not ready yet
+
+  start:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start production
+        run: npm start
