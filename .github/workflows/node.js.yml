@@ -36,6 +36,5 @@ jobs:
         fi
 
         echo "No unignored build errors found. Workflow continues."
+    
     - run: npm test
-    - name: Start Development
-      run: npm run dev
