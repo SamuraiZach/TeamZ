@@ -404,6 +404,7 @@
     "nodedir": "C:\\Users\\avasw\\AppData\\Local\\node-gyp\\Cache\\18.17.1",
     "python": "C:\\Users\\avasw\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
     "standalone_static_library": 1,
-    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"
+    "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+    "configfile": "configure.gypi"
   }
 }
