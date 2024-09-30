@@ -30,7 +30,7 @@ jobs:
         if grep -q "node_modules/discord.js/typings/index.d.ts" build-output.log; then
           echo "Ignoring build errors from node_modules/discord.js/typings/index.d.ts"
 
-        sed -i 'node_modules/discord.js/typings/index.d.ts' build-output.log
+          sed -i '/node_modules\/discord\.js\/typings\/index\.d\.ts/d' build-output.log
         fi
 
         if grep -q "Error" build-output.log; then
