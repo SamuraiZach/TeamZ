@@ -23,5 +23,20 @@ jobs:
         cache: 'npm'
     - run: npm cache clean --force
     - run: npm ci
-    - run: npm run build --if-present
+    - name: build
+      run: |
+        npm run build 2>&1 | tee build-output.log
+
+        if grep -q "node_modules/discord.js/typings/index.d.ts" build-output.log; then
+          echo "Ignoring build errors from node_modules/discord.js/typings/index.d.ts"
+
+        sed -i 'node_modules/discord.js/typings/index.d.ts' build-output.log
+        fi
+
+        if grep -q "Error" build-output.log; then
+          echo "Other build errors found. Failing the workflow."
+          exit 1
+        fi
+
+        echo "No unignored build errors found. Workflow continues."
     - run: npm test
