@@ -33,7 +33,7 @@
 		"axios": "^1.4.0",
 		"canvas": "^2.11.2",
 		"console-stamp": "^3.0.2",
-		"discord.js": "^12.5.3",
+		"discord.js": "^14.16.3",
 		"module-alias": "^2.2.2",
 		"moment": "^2.29.1",
 		"mongodb": "^3.6.3",
