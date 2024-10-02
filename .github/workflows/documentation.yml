@@ -1,0 +1,14 @@
+name: documentation
+
+on:
+  push:
+    branches: [ "main", "Ava-branch" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: autodoc
+        run: echo "Not completed yet"
+        # run: npm run autodoc

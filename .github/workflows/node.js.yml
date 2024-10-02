@@ -1,0 +1,43 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: node
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '>=18'
+        cache: 'npm'
+    - run: npm cache clean --force
+    - run: npm ci
+    - name: build
+      run: |
+        npm run build 2>&1 | tee build-output.log
+
+        if grep -q "node_modules/discord.js/typings/index.d.ts" build-output.log; then
+          echo "Ignoring build errors from node_modules/discord.js/typings/index.d.ts"
+
+          sed -i '/node_modules\/discord\.js\/typings\/index\.d\.ts/d' build-output.log
+        fi
+
+        if grep -q "Error" build-output.log; then
+          echo "Other build errors found. Failing the workflow."
+          exit 1
+        fi
+
+        echo "No unignored build errors found. Workflow continues."
+    
+    - run: npm test
+
+    # - name: Start Development
+    # run: npm run dev
