@@ -52,6 +52,7 @@ function getEnvVar(name: keyof Config): string {
 	}
 	return value;
 }
+//Branch change
 
 export const config: Config = {
 	DB_CONNECTION: getEnvVar('DB_CONNECTION'),
