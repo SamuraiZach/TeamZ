@@ -15,8 +15,8 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.User,
 			required: true
 		}
-***REMOVED***;
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	];
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user = interaction.options.getUser('user');
@@ -42,7 +42,7 @@ export default class extends Command {
 				{ name: 'Account Created', value: accountCreated, inline: true },
 				{ name: 'Joined Server', value: memberSince, inline: true },
 				{ name: 'Roles', value: roles, inline: true }
-		***REMOVED***);
+			]);
 
 		return interaction.reply({ embeds: [embed], ephemeral: true });
 	}

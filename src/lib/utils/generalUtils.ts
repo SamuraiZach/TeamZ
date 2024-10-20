@@ -90,7 +90,7 @@ export async function updateDropdowns(interaction: CommandInteraction): Promise<
 	// get roles from DB
 	let courses: Array<Course> = await interaction.client.mongo.collection(DB.COURSES).find().toArray();
 	const assignableRoles = await interaction.client.mongo.collection(DB.ASSIGNABLE).find().toArray();
-	let assignables = [***REMOVED***
+	let assignables = [];
 	for (const role of assignableRoles) {
 		const { name } = await interaction.guild.roles.fetch(role.id);
 		assignables.push({ name, id: role.id });
@@ -149,7 +149,7 @@ export async function generateQuestionId(interaction: CommandInteraction, depth 
 }
 
 export function readdirRecursive(dir: string): string[] {
-	let results = [***REMOVED***
+	let results = [];
 	const list = fs.readdirSync(dir);
 	list.forEach((file) => {
 		file = `${dir}/${file}`;

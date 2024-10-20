@@ -6,7 +6,7 @@ import { EmbedBuilder, ApplicationCommandPermissions, ApplicationCommandOptionDa
 
 export default class extends Command {
 
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	description = `Have ${BOT.NAME} google something for someone`;
 	options: ApplicationCommandOptionData[] = [
 		{
@@ -15,7 +15,7 @@ export default class extends Command {
 			description: `What you'd like ${BOT.NAME} to Google for someone!`,
 			required: true
 		}
-***REMOVED***;
+	];
 
 	run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const query = interaction.options.getString('query');

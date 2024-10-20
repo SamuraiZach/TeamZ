@@ -6,9 +6,9 @@ async function processBanAdd(ban: GuildBan, modLog: TextChannel): Promise<void> 
 	if (guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await guild.fetchAuditLogs({ type: AuditLogEvent.MemberBanAdd, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -33,9 +33,9 @@ async function processBanRemove(ban: GuildBan, modLog: TextChannel): Promise<voi
 	if (ban.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await guild.fetchAuditLogs({ type: AuditLogEvent.MemberBanRemove, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -89,7 +89,7 @@ async function processMemberRemove(member: GuildMember | PartialGuildMember, mod
 	if (member.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await member.guild.fetchAuditLogs({ type: AuditLogEvent.MemberKick, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	if (!logEntry) return;
 
 	if (!('id' in logEntry.target)

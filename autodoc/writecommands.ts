@@ -54,9 +54,9 @@ async function main() {
 
 		// scrape commands
 		const dirs = file.split('/');
-		const name = dirs[dirs.length - 1].split('.')[0***REMOVED***
+		const name = dirs[dirs.length - 1].split('.')[0];
 		command.name = name;
-		command.category = dirs[dirs.length - 2] === 'commands' ? 'general' : dirs[dirs.length - 2***REMOVED***
+		command.category = dirs[dirs.length - 2] === 'commands' ? 'general' : dirs[dirs.length - 2];
 
 		if (command.category === 'admin') {
 			continue;

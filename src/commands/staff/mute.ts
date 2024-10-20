@@ -7,7 +7,7 @@ export default class extends Command {
 
 	description = 'Gives the muted role to the given user.';
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	options: ApplicationCommandOptionData[] = [
 		{
 			name: 'user',
@@ -15,7 +15,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.User,
 			required: true
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user = interaction.options.getUser('user');

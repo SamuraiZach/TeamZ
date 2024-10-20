@@ -24,7 +24,7 @@ export default class extends Command {
 		// const confirmBtns = [
 		// 	new MessageButton({ label: 'Cancel', customId: 'cancel', style: 'SECONDARY' }),
 		// 	new MessageButton({ label: 'Proceed', customId: 'proceed', style: 'DANGER' })
-		// ***REMOVED***
+		// ];
 
 		// const confirmMsg = await interaction.channel.send({
 		// 	embeds: [confirmEmbed],
@@ -58,7 +58,7 @@ export default class extends Command {
 		// 		confirmEmbed.setTitle(`<a:loading:928003042954059888> Pruning ${toKick.size} members...`);
 		// 		confirmMsg.edit({ embeds: [confirmEmbed], components: [new ActionRowBuilder({ components: confirmBtns })] });
 
-		// 		const awaitedKicks: Promise<GuildMember>[] = [***REMOVED***
+		// 		const awaitedKicks: Promise<GuildMember>[] = [];
 		// 		toKick.forEach(member => {
 		// 			awaitedKicks.push(member.kick(`Pruned by ${interaction.user.username} (${interaction.user.id})`));
 		// 			return;

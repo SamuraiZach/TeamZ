@@ -8,7 +8,7 @@ import { Poll, PollResult } from '@lib/types/Poll';
 import { SageInteractionType } from '@root/src/lib/types/InteractionType';
 
 const QUESTION_CHAR_LIMIT = 256;
-const args = ['Single', 'Multiple'***REMOVED***
+const args = ['Single', 'Multiple'];
 
 export default class extends Command {
 
@@ -43,7 +43,7 @@ export default class extends Command {
 				value: arg
 			}))
 		}
-***REMOVED***
+	]
 	runInDM = false;
 
 	resetArray(array: number[], len: number): number[] {
@@ -102,8 +102,8 @@ export default class extends Command {
 			.setFooter({ text: pollFooter })
 			.setColor('Random');
 
-		const choiceBtns = [***REMOVED*** // first 5 choices
-		const choiceBtns2 = [***REMOVED*** // next 5
+		const choiceBtns = []; // first 5 choices
+		const choiceBtns2 = []; // next 5
 		choices.forEach((choice, index) => {
 			if (index < 5) {
 				choiceBtns.push(new ButtonBuilder({ label: `${choice}`,
@@ -153,21 +153,21 @@ export async function handlePollOptionSelect(bot: Client, i: ButtonInteraction):
 	const pollMsg = await i.channel.messages.fetch(i.message.id);
 	const dbPoll = await bot.mongo.collection<Poll>(DB.POLLS).findOne({ message: pollMsg.id });
 	const pollOwner = await i.guild.members.fetch(dbPoll.owner);
-	let newPoll = { ...dbPoll ***REMOVED***
+	let newPoll = { ...dbPoll };
 	const emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'].slice(0, newPoll.results.length);
-	const newChoice = i.customId.split('_')[1***REMOVED***
+	const newChoice = i.customId.split('_')[1];
 
 	const prevAnswers = dbPoll.results.filter(r => r.users.includes(i.user.id)).map(res => res.option);
 
 	if (prevAnswers.length === 0 || !prevAnswers.includes(newChoice)) {
-		newPoll = { ...newPoll, results: addAnswer(newPoll.results, i.user.id, newChoice) ***REMOVED***
+		newPoll = { ...newPoll, results: addAnswer(newPoll.results, i.user.id, newChoice) };
 	}
 	// if they clicked the same answer again or the poll was a single poll and they had a previous answer
 	if (prevAnswers.includes(newChoice) || (prevAnswers && newPoll.type === 'Single')) {
 		newPoll = { ...newPoll, results: removeAnswer(
 			newPoll.results,
 			i.user.id,
-			newPoll.type === 'Single' ? prevAnswers[0] : newChoice) ***REMOVED***
+			newPoll.type === 'Single' ? prevAnswers[0] : newChoice) };
 	}
 
 	const resultMap = new Map<string, number>();
@@ -177,7 +177,7 @@ export async function handlePollOptionSelect(bot: Client, i: ButtonInteraction):
 
 	let choiceText = '';
 	let count = 0;
-	const choiceBtns: ButtonBuilder[] = [***REMOVED***
+	const choiceBtns: ButtonBuilder[] = [];
 	resultMap.forEach((value, key) => {
 		choiceText += `${emotes[count]} ${key}: ${value} vote${value === 1 ? '' : 's'}\n`;
 		choiceBtns.push(new ButtonBuilder({
@@ -200,7 +200,7 @@ export async function handlePollOptionSelect(bot: Client, i: ButtonInteraction):
 		.setFooter({ text: pollFooter })
 		.setColor('Random');
 
-	const msgComponents = [new ActionRowBuilder<ButtonBuilder>({ components: choiceBtns.slice(0, 5) })***REMOVED***
+	const msgComponents = [new ActionRowBuilder<ButtonBuilder>({ components: choiceBtns.slice(0, 5) })];
 	if (choiceBtns.length > 5) msgComponents.push(new ActionRowBuilder({ components: choiceBtns.slice(5) }));
 
 	await pollMsg.edit({ embeds: [pollEmbed], components: msgComponents });
@@ -224,7 +224,7 @@ export async function handlePollOptionSelect(bot: Client, i: ButtonInteraction):
 function removeAnswer(results: PollResult[], user: string, choice: string) {
 	return results.map(r => {
 		if (r.option === choice) {
-			return { ...r, users: r.users.filter(id => id !== user) ***REMOVED***
+			return { ...r, users: r.users.filter(id => id !== user) };
 		} else { return r; }
 	});
 }
@@ -241,7 +241,7 @@ function removeAnswer(results: PollResult[], user: string, choice: string) {
 function addAnswer(results: PollResult[], user: string, choice: string) {
 	return results.map(r => {
 		if (r.option === choice) {
-			return { ...r, users: [...r.users, user] ***REMOVED***
+			return { ...r, users: [...r.users, user] };
 		} else { return r; }
 	});
 }

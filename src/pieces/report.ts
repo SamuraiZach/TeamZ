@@ -28,7 +28,7 @@ async function handleCron(bot: Client): Promise<void> {
 	// send the "lite" course reports to professors
 	const reportProfs: Array<SageUser> = users.filter(user => EMAIL.REPORT_ADDRESSES.includes(user.email));
 	reportProfs.forEach(prof => {
-		const reports: Attachment[] = [***REMOVED***
+		const reports: Attachment[] = [];
 		const coursesTaught = courses.filter(course => prof.roles.includes(course.roles.staff));
 		coursesTaught.forEach(course => {
 			const courseUsers = users.filter(user => user.courses.includes(course.name));

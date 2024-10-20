@@ -8,7 +8,7 @@ import { Command } from '@lib/types/Command';
 
 export default class extends Command {
 
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	description = 'Looks up information about a given user';
 	runInDM = false;
 	options: ApplicationCommandOptionData[] = [
@@ -18,7 +18,7 @@ export default class extends Command {
 			description: 'The member to look up',
 			required: true
 		}
-***REMOVED***;
+	];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user = interaction.options.getUser('user');
@@ -40,7 +40,7 @@ export default class extends Command {
 				{ name: 'Username', value: `${user.tag}`, inline: false },
 				{ name: 'UD Email:', value: entry.email, inline: false },
 				{ name: 'Message count: ', value: `This week: ${entry.count.toString()}`, inline: false }
-		***REMOVED***);
+			]);
 
 		if (!entry.pii) {
 			const sender: SageUser = await interaction.client.mongo.collection(DB.USERS).findOne({ discordId: interaction.user.id });

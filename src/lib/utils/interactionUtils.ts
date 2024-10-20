@@ -10,7 +10,7 @@ export function getDataFromCustomId(customId: string): SageComponentInteractionD
 		commandOwner: owner,
 		type: commandType as SageInteractionType,
 		additionalData: extra
-	***REMOVED***
+	};
 }
 
 /**

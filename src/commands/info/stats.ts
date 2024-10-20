@@ -9,7 +9,7 @@ export default class extends Command {
 	description = 'Displays info about Sage\'s current status';
 
 	async run(interaction:ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
-		const fields: Array<EmbedField> = [***REMOVED***
+		const fields: Array<EmbedField> = [];
 		const bot = interaction.client;
 
 		fields.push({

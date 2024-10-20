@@ -31,7 +31,7 @@
 		"timespan",
 		"udel",
 		"viewremind"
-***REMOVED***,
+	],
 	"search.exclude": {
 		"**/node_modules": false
 	},

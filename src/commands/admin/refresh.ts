@@ -13,12 +13,12 @@ export default class extends Command {
 		const commandFiles = readdirRecursive(`${__dirname}/..`).filter(file => file.endsWith('.js'));
 		interaction.deferReply();
 
-		const commands: ApplicationCommandData[] = [***REMOVED***
+		const commands: ApplicationCommandData[] = [];
 		for (const file of commandFiles) {
 			const commandModule = await import(file);
 
 			const dirs = file.split('/');
-			const name = dirs[dirs.length - 1].split('.')[0***REMOVED***
+			const name = dirs[dirs.length - 1].split('.')[0];
 
 			// semi type-guard, typeof returns function for classes
 			if (!(typeof commandModule.default === 'function')) {
@@ -35,7 +35,7 @@ export default class extends Command {
 				throw `Command ${command.name}'s description must be between 1 and 100 characters.`;
 			}
 
-			command.category = dirs[dirs.length - 2***REMOVED***
+			command.category = dirs[dirs.length - 2];
 
 			commands.push({
 				name: command.name,

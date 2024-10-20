@@ -2,7 +2,7 @@ import { ApplicationCommandOptionData, ChatInputCommandInteraction, EmbedBuilder
 import { Command } from '@lib/types/Command';
 import { generateErrorEmbed } from '@root/src/lib/utils/generalUtils';
 
-const DEFAULT_RANGE = [1, 6***REMOVED***
+const DEFAULT_RANGE = [1, 6];
 const DEFAULT_ROLLS = 1;
 export default class extends Command {
 
@@ -35,7 +35,7 @@ export default class extends Command {
 			required: false
 		}
 
-***REMOVED***
+	]
 
 	run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		let min = interaction.options.getNumber('minimum');
@@ -44,7 +44,7 @@ export default class extends Command {
 		const keepHighest = interaction.options.getNumber('keephighest') || numRolls;
 
 		if (!min) {
-			[min, max] = [DEFAULT_RANGE[0], max || DEFAULT_RANGE[1]***REMOVED***
+			[min, max] = [DEFAULT_RANGE[0], max || DEFAULT_RANGE[1]];
 		} else if (!max && min) {
 			return interaction.reply({ embeds: [generateErrorEmbed('If you provide a minimum, you must also provide a maximum.')], ephemeral: true });
 		} else if (max < min) {
@@ -59,7 +59,7 @@ export default class extends Command {
 			return interaction.reply({ embeds: [generateErrorEmbed('The number of dice you keep must be lower than the number of dice you roll.')], ephemeral: true });
 		}
 
-		const results = [***REMOVED***
+		const results = [];
 		for (let i = 0; i < numRolls; i++) {
 			results.push(Math.floor((Math.random() * (max - min + 1)) + min));
 		}
@@ -82,7 +82,7 @@ export default class extends Command {
 				name: 'Result',
 				value: totalText
 			}
-	***REMOVED***;
+		];
 
 		const responseEmbed = new EmbedBuilder()
 			.setColor(Math.floor(Math.random() * 16777215))

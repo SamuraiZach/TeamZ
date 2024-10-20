@@ -30,7 +30,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: false
 		}
-***REMOVED***
+	]
 
 	run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const content = interaction.options.getString('content');
@@ -50,7 +50,7 @@ export default class extends Command {
 			mode: 'public', // temporary
 			expires: new Date(duration + Date.now()),
 			repeat
-		***REMOVED***
+		};
 
 		interaction.client.mongo.collection(DB.REMINDERS).insertOne(reminder);
 

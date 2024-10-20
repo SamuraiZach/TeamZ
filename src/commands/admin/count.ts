@@ -7,14 +7,14 @@ export default class extends Command {
 
 	description = 'Count channels in a category, use during archiving';
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'category',
 		description: 'The name of the category you want to check (forum channels not included).',
 		type: ApplicationCommandOptionType.Channel,
 		required: true
-	}***REMOVED***
+	}];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		// grab channel from command parameter

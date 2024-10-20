@@ -17,13 +17,13 @@
 		"types": [
 			"node",
 			"discord.js"
-	***REMOVED***,
+		],
         "module": "commonjs"
     },
 	"include": [
 		"config.ts",
 		"src/**/*"
-***REMOVED***,
+	],
     "exclude": [
         "**/node_modules",
 		"**/node_modules/discord.js/typings/index.d.ts", // problematic in djs versions >13.1

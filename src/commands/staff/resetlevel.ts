@@ -11,7 +11,7 @@ export default class extends Command {
 	extendedHelp = `Using with no value will reset to 0. A positive integer will
 	set their message count and a negative will subtract that from their total`;
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	options: ApplicationCommandOptionData[] = [
 		{
 			name: 'user',
@@ -25,7 +25,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.Integer,
 			required: false
 		}
-***REMOVED***;
+	];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user = interaction.options.getUser('user');

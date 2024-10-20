@@ -7,7 +7,7 @@ import { ApplicationCommandOptionData, ApplicationCommandOptionType, Application
 export default class extends Command {
 
 	description = `Creates an issue in ${BOT.NAME}'s repository.`;
-	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'title',
@@ -33,7 +33,7 @@ export default class extends Command {
 		const label = interaction.options.getString('labels');
 		const body = interaction.options.getString('body');
 
-		const labels = label ? label.split(', ') : [***REMOVED***
+		const labels = label ? label.split(', ') : [];
 
 		const newIssue = await interaction.client.octokit.issues.create({
 			owner: 'ud-cis-discord',

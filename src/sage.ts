@@ -19,13 +19,13 @@ const BOT_INTENTS = [
 	IntentsBitField.Flags.GuildMembers,
 	IntentsBitField.Flags.GuildMessages,
 	IntentsBitField.Flags.GuildMessageReactions
-***REMOVED***
+];
 
 const BOT_PARTIALS = [
 	Partials.Channel,
 	Partials.Message,
 	Partials.GuildMember
-***REMOVED***
+];
 
 consoleStamp(console, {
 	format: ':date(dd/mm/yy hh:MM:ss.L tt)'
@@ -59,7 +59,7 @@ async function main() {
 				id: value.id,
 				permission: true,
 				type: ApplicationCommandPermissionType.User
-			***REMOVED***
+			};
 			return permData;
 		}));
 
@@ -67,7 +67,7 @@ async function main() {
 		for (const file of pieceFiles) {
 			const piece = await import(file);
 			const dirs = file.split('/');
-			const name = dirs[dirs.length - 1].split('.')[0***REMOVED***
+			const name = dirs[dirs.length - 1].split('.')[0];
 			if (typeof piece.default !== 'function') throw `Invalid piece: ${name}`;
 			piece.default(bot);
 			console.log(`${name} piece loaded.`);

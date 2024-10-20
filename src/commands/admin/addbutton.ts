@@ -4,7 +4,7 @@ import { Command } from '@lib/types/Command';
 import { ApplicationCommandOptionData, ApplicationCommandOptionType, ApplicationCommandPermissions, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder,
 	ButtonStyle, TextChannel, InteractionResponse } from 'discord.js';
 
-const STYLES = ['primary', 'secondary', 'success', 'danger'***REMOVED***
+const STYLES = ['primary', 'secondary', 'success', 'danger'];
 
 export default class extends Command {
 

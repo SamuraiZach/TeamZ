@@ -51,7 +51,7 @@ async function main() {
 		if (args[0].toLowerCase() === 'staff') {
 			emails = args;
 		} else {
-			emails = ['STUDENT', ...args***REMOVED***
+			emails = ['STUDENT', ...args];
 		}
 	} else {
 		const data = fs.readFileSync('./resources/emails.csv');
@@ -99,8 +99,9 @@ async function main() {
 			isVerified: false,
 			pii: false,
 			roles: [],
-			courses: []
-		***REMOVED***
+			courses: [],
+			commandCount: []
+		};
 
 		if (course) {
 			if (isStaff) {

@@ -13,7 +13,7 @@ export default class extends Command {
 		const url = 'https://srhpyqt94yxb.statuspage.io/api/v2/summary.json';
 		const currentStatus = await fetch(url, { method: 'Get' }).then(r => r.json()) as DiscordStatus;
 
-		const fields: Array<EmbedField> = [***REMOVED***
+		const fields: Array<EmbedField> = [];
 
 		if (currentStatus.components.every(component => component.status === 'operational')) {
 			fields.push({

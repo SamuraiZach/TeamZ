@@ -23,7 +23,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: false
 		}
-***REMOVED***
+	]
 
 	// never assume that students are not dumb
 
@@ -58,7 +58,7 @@ export default class extends Command {
 		}
 
 		const entries: Array<QuestionTag> = await interaction.client.mongo.collection(DB.QTAGS).find({ course: course.name, assignment: assignment }).toArray();
-		const fields: Array<EmbedField> = [***REMOVED***
+		const fields: Array<EmbedField> = [];
 		if (entries.length === 0) {
 			return interaction.reply({ content: `There are no questions for ${course.name}, ${assignment}.
 		To add questions, use the tag command (\`/help tag\`)`.replace('\t', ''), ephemeral: true });
@@ -69,7 +69,7 @@ export default class extends Command {
 		const embeds: Array<EmbedBuilder> = [new EmbedBuilder()
 			.setTitle(`Questions for ${course} ${assignment}`)
 			.addFields(fields.splice(0, 25))
-			.setColor('DarkAqua')***REMOVED***
+			.setColor('DarkAqua')];
 
 		while (fields.length > 0) {
 			embeds.push(new EmbedBuilder()

@@ -25,15 +25,15 @@ export const STAFF_PERMS: ApplicationCommandPermissions = {
 	id: ROLES.STAFF,
 	permission: true,
 	type: ApplicationCommandPermissionType.Role
-***REMOVED***
+};
 
 export const ADMIN_PERMS: ApplicationCommandPermissions = {
 	id: ROLES.ADMIN,
 	permission: true,
 	type: ApplicationCommandPermissionType.Role
-***REMOVED***
+};
 
-export let BOTMASTER_PERMS: ApplicationCommandPermissions[***REMOVED***
+export let BOTMASTER_PERMS: ApplicationCommandPermissions[];
 
 export function setBotmasterPerms(data: ApplicationCommandPermissions[]): void {
 	BOTMASTER_PERMS = data;

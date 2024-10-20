@@ -58,8 +58,8 @@ async function handleDropdown(interaction: SelectMenuInteraction) {
 	if (customId === 'roleselect' && member instanceof GuildMember) {
 		const { component } = interaction;
 		const removed = component.options.filter((option) => !values.includes(option.value));
-		const addedRoleNames = [***REMOVED***
-		const removedRoleNames = [***REMOVED***
+		const addedRoleNames = [];
+		const removedRoleNames = [];
 		for (const id of removed) {
 			const role = interaction.guild.roles.cache.find(r => r.id === id.value);
 			if (!role.name.includes('CISC') && member.roles.cache.some(r => r.id === id.value)) {
@@ -177,20 +177,20 @@ export async function handleButton(interaction: ButtonInteraction): Promise<void
 export async function loadCommands(bot: Client): Promise<void> {
 	bot.commands = new Collection();
 	const sageData = await bot.mongo.collection(DB.CLIENT_DATA).findOne({ _id: bot.user.id }) as SageData;
-	const oldCommandSettings = sageData?.commandSettings || [***REMOVED***
+	const oldCommandSettings = sageData?.commandSettings || [];
 	await bot.guilds.cache.get(GUILDS.MAIN).commands.fetch();
 	const { commands } = bot.guilds.cache.get(GUILDS.MAIN);
 	let numNew = 0, numEdited = 0;
 
 	const commandFiles = readdirRecursive(`${__dirname}/../commands`).filter(file => file.endsWith('.js'));
 
-	const awaitedCmds: Promise<ApplicationCommand>[] = [***REMOVED***
+	const awaitedCmds: Promise<ApplicationCommand>[] = [];
 
 	for (const file of commandFiles) {
 		const commandModule = await import(file);
 
 		const dirs = file.split('/');
-		const name = dirs[dirs.length - 1].split('.')[0***REMOVED***
+		const name = dirs[dirs.length - 1].split('.')[0];
 
 		// semi type-guard, typeof returns function for classes
 		if (!(typeof commandModule.default === 'function')) {
@@ -207,7 +207,7 @@ export async function loadCommands(bot: Client): Promise<void> {
 			throw `Command ${command.name}'s description must be between 1 and 100 characters.`;
 		}
 
-		command.category = dirs[dirs.length - 2***REMOVED***
+		command.category = dirs[dirs.length - 2];
 
 		const guildCmd = commands.cache.find(cmd => cmd.name === command.name);
 
@@ -283,7 +283,7 @@ async function runCommand(interaction: ChatInputCommandInteraction, bot: Client)
 		}
 
 		const failMessages = ['HTTP 401: Unauthorized', `I'm sorry ${interaction.user.username}, I'm afraid I can't do that.`,
-			'Username is not in the sudoers file. This incident will be reported.', `I'm sorry ${interaction.user.username}, but you need sigma nine clearance for that.`***REMOVED***
+			'Username is not in the sudoers file. This incident will be reported.', `I'm sorry ${interaction.user.username}, but you need sigma nine clearance for that.`];
 		if (!success) return interaction.reply(failMessages[Math.floor(Math.random() * failMessages.length)]);
 
 		try {

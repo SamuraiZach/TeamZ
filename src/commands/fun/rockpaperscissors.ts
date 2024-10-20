@@ -5,7 +5,7 @@ import { SageInteractionType } from '@lib/types/InteractionType';
 import { buildCustomId, getDataFromCustomId } from '@lib/utils/interactionUtils';
 
 const DECISION_TIMEOUT = 10;
-const CHOICES = ['rock', 'paper', 'scissors'***REMOVED***
+const CHOICES = ['rock', 'paper', 'scissors'];
 
 export default class extends Command {
 
@@ -49,7 +49,7 @@ export default class extends Command {
 				style: ButtonStyle.Primary,
 				emoji: '✌'
 			})
-	***REMOVED***;
+		];
 
 		await interaction.reply({
 			embeds: [choiceEmbed],
@@ -86,8 +86,8 @@ function checkWinner(playerNum: number, botNum: number): string {
 
 export async function handleRpsOptionSelect(i: ButtonInteraction): Promise<void> {
 	const interactionData = getDataFromCustomId(i.customId);
-	const choice = interactionData.additionalData[0***REMOVED***
-	const timer = interactionData.additionalData[1***REMOVED***
+	const choice = interactionData.additionalData[0];
+	const timer = interactionData.additionalData[1];
 	if (i.user.id !== interactionData.commandOwner) {
 		await i.reply({
 			content: 'You cannot respond to a command you did not execute',
@@ -99,7 +99,7 @@ export async function handleRpsOptionSelect(i: ButtonInteraction): Promise<void>
 	clearInterval(Number.parseInt(timer));
 	const msg = await i.channel.messages.fetch(i.message.id);
 
-	const botMove = CHOICES[Math.floor(Math.random() * CHOICES.length)***REMOVED***
+	const botMove = CHOICES[Math.floor(Math.random() * CHOICES.length)];
 	const winner = checkWinner(CHOICES.indexOf(choice), CHOICES.indexOf(botMove));
 
 	let winEmbed: EmbedBuilder;

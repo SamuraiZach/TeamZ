@@ -23,9 +23,9 @@ import { GUILDS, CHANNELS } from '@root/config';
 async function processChannelCreate(channel: GuildChannel | DMChannel, serverLog: TextChannel): Promise<void> {
 	if (!('guild' in channel) || channel.guild.id !== GUILDS.MAIN) return;
 	const logs = (await channel.guild.fetchAuditLogs({ type: AuditLogEvent.ChannelCreate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -69,9 +69,9 @@ async function processChannelCreate(channel: GuildChannel | DMChannel, serverLog
 async function processChannelDelete(channel: GuildChannel | DMChannel, serverLog: TextChannel): Promise<void> {
 	if (!('guild' in channel) || channel.guild.id !== GUILDS.MAIN) return;
 	const logs = (await channel.guild.fetchAuditLogs({ type: AuditLogEvent.ChannelDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -98,7 +98,7 @@ async function processChannelUpdate(oldChannel: GuildChannel | DMChannel, newCha
 
 	let toSend = false;
 	const logs = (await newChannel.guild.fetchAuditLogs({ type: AuditLogEvent.ChannelUpdate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	if (!logEntry) return;
 
 	const embed = new EmbedBuilder()
@@ -107,7 +107,7 @@ async function processChannelUpdate(oldChannel: GuildChannel | DMChannel, newCha
 		.setColor('Purple')
 		.setTimestamp();
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -171,7 +171,7 @@ async function processChannelUpdate(oldChannel: GuildChannel | DMChannel, newCha
 async function processEmojiCreate(emote: GuildEmoji, serverLog: TextChannel): Promise<void> {
 	if (emote.guild.id !== GUILDS.MAIN) return;
 	const logs = (await emote.guild.fetchAuditLogs({ type: AuditLogEvent.EmojiCreate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
@@ -186,7 +186,7 @@ async function processEmojiCreate(emote: GuildEmoji, serverLog: TextChannel): Pr
 async function processEmojiDelete(emote: GuildEmoji, serverLog: TextChannel): Promise<void> {
 	if (emote.guild.id !== GUILDS.MAIN) return;
 	const logs = (await emote.guild.fetchAuditLogs({ type: AuditLogEvent.EmojiDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
@@ -201,7 +201,7 @@ async function processEmojiDelete(emote: GuildEmoji, serverLog: TextChannel): Pr
 async function processEmojiUpdate(oldEmote: GuildEmoji, newEmote: GuildEmoji, serverLog: TextChannel): Promise<void> {
 	if (newEmote.guild.id !== GUILDS.MAIN || newEmote.name === oldEmote.name) return;
 	const logs = (await newEmote.guild.fetchAuditLogs({ type: AuditLogEvent.EmojiUpdate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
@@ -216,11 +216,11 @@ async function processInviteCreate(invite: Invite, serverLog: TextChannel): Prom
 	if (invite.guild.id !== GUILDS.MAIN) return;
 	// eslint-disable-next-line no-extra-parens
 	const logs = (await (invite.guild as Guild).fetchAuditLogs({ type: AuditLogEvent.InviteCreate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
 	if (logEntry.reason?.startsWith('[no log]')) return;
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -269,7 +269,7 @@ async function processInviteDelete(invite: Invite, serverLog: TextChannel): Prom
 	if (invite.guild.id !== GUILDS.MAIN) return;
 	// eslint-disable-next-line no-extra-parens
 	const logs = (await (invite.guild as Guild).fetchAuditLogs({ type: AuditLogEvent.InviteDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	if (!logEntry) return;
 
 	if (logEntry.reason?.startsWith('[no log]')) return;
@@ -306,7 +306,7 @@ async function processMessageDelete(msg: Message | PartialMessage, serverLog: Te
 			.setTimestamp();
 	}
 
-	const attachments: AttachmentBuilder[] = [***REMOVED***
+	const attachments: AttachmentBuilder[] = [];
 
 	if (msg.attachments.size > 0) {
 		embed.addFields('Attachments', `\`${msg.attachments.map(attachment => attachment.name).join('`, `')}\``);
@@ -330,7 +330,7 @@ async function processBulkDelete(messages: Array<Message | PartialMessage>, serv
 	if (!('name' in messages[0].channel) || messages[0].guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await serverLog.guild.fetchAuditLogs({ type: AuditLogEvent.MessageBulkDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
 	const spacer = '\n\n**************************************************************************\n\n';
 	let buffer = '';
@@ -369,9 +369,9 @@ async function processRoleCreate(role: Role, serverLog: TextChannel): Promise<vo
 	if (role.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await role.guild.fetchAuditLogs({ type: AuditLogEvent.RoleCreate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -405,9 +405,9 @@ async function processRoleDelete(role: Role, serverLog: TextChannel): Promise<vo
 	if (role.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await role.guild.fetchAuditLogs({ type: AuditLogEvent.RoleDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (logEntry.reason) {
 		fields.push({
@@ -431,7 +431,7 @@ async function processRoleUpdate(oldRole: Role, newRole: Role, serverLog: TextCh
 	if (newRole.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await newRole.guild.fetchAuditLogs({ type: AuditLogEvent.RoleUpdate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	let toSend = false;
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
@@ -466,7 +466,7 @@ async function processThreadCreate(thread: ThreadChannel, serverLog: TextChannel
 	if (thread.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await thread.guild.fetchAuditLogs({ type: AuditLogEvent.ThreadCreate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
 		.setTitle(`Thread created: "${thread.name}"`)
@@ -483,7 +483,7 @@ async function processThreadDelete(thread: ThreadChannel, serverLog: TextChannel
 	if (thread.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await thread.guild.fetchAuditLogs({ type: AuditLogEvent.ThreadDelete, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
 		.setTitle(`Thread deleted: "${thread.name}"`)
@@ -499,7 +499,7 @@ async function processThreadUpdate(oldThread: ThreadChannel, newThread: ThreadCh
 	if (newThread.guild.id !== GUILDS.MAIN) return;
 
 	const logs = (await newThread.guild.fetchAuditLogs({ type: AuditLogEvent.ThreadUpdate, limit: 1 })).entries;
-	const [logEntry] = [...logs.values()***REMOVED***
+	const [logEntry] = [...logs.values()];
 	const embed = new EmbedBuilder()
 		.setAuthor({ name: logEntry.executor.tag, iconURL: logEntry.executor.avatarURL() })
 		.setTitle(`Thread updated: "${newThread.name}"`)

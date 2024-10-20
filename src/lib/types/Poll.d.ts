@@ -10,5 +10,5 @@ export interface Poll {
 
 export interface PollResult {
 	option: string;
-	users: string[***REMOVED***
+	users: string[];
 }

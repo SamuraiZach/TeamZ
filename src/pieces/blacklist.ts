@@ -77,7 +77,7 @@ const NORMALIZE: [RegExp, string][] = [
 	[/4/g, 'a'],
 	[/9/g, 'g'],
 	[/0/g, 'o']
-***REMOVED***
+];
 
 async function register(bot: Client): Promise<void> {
 	bot.on('messageCreate', async (msg) => {

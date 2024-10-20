@@ -9,7 +9,7 @@ export default class extends Command {
 
 	description = `Adds a role to the assignable collection of the database, or removes it if it's there already`;
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'role',
@@ -23,7 +23,7 @@ export default class extends Command {
 		const role = await interaction.guild.roles.fetch(apiRole.id);
 
 		const assignables = interaction.client.mongo.collection(DB.ASSIGNABLE);
-		const newRole: AssignableRole = { id: role.id ***REMOVED***
+		const newRole: AssignableRole = { id: role.id };
 
 		if (await assignables.countDocuments(newRole) > 0) {
 			await interaction.reply('Removing role...');

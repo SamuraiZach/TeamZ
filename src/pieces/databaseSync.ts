@@ -20,8 +20,8 @@ async function handleCron(bot: Client) {
 		const currentUser = await bot.mongo.collection<SageUser>(DB.USERS).findOne({ discordId: member.user.id });
 		if (!currentUser) return; // not in database (for some reason; maybe ID is not linked to a user document)
 
-		const newRoles = [***REMOVED***
-		const newCourses = [***REMOVED***
+		const newRoles = [];
+		const newCourses = [];
 
 		member.roles.cache.forEach(role => {
 			if (role.name !== '@everyone') {

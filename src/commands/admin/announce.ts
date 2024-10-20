@@ -57,7 +57,7 @@ export default class extends Command {
 			new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(contentsComponent),
 			new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(channelComponent),
 			new ActionRowBuilder<ModalActionRowComponentBuilder>().addComponents(fileComponent)
-	***REMOVED***;
+		];
 		modal.addComponents(...modalRows);
 
 		await interaction.showModal(modal);

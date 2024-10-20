@@ -11,7 +11,7 @@ export default class extends Command {
 
 	description = 'Remove a course';
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'course',
@@ -40,7 +40,7 @@ export default class extends Command {
 		const confirmBtns = [
 			new ButtonBuilder({ label: 'Yes', customId: 'y', style: ButtonStyle.Secondary }),
 			new ButtonBuilder({ label: 'No', customId: 'n', style: ButtonStyle.Danger })
-	***REMOVED***;
+		];
 
 		//	a warning gets issued for this command
 		const baseText = `Are you sure you want to delete ${course}? ` +

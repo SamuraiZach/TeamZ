@@ -22,7 +22,7 @@ const MAGIC8BALL_RESPONSES = [
 	'Yes.',
 	'Yes – definitely.',
 	'You may rely on it.'
-***REMOVED***
+];
 
 export default class extends Command {
 
@@ -36,7 +36,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
+	]
 
 	run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const question = interaction.options.getString('question');

@@ -15,8 +15,8 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.Role,
 			required: true
 		}
-***REMOVED***;
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	];
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const role = interaction.options.getRole('role') as Role;
@@ -33,7 +33,7 @@ export default class extends Command {
 			.setTitle(`${role.name} | ${memberList.size} members`)
 			.setFooter({ text: `Role ID: ${role.id}` });
 
-		const attachments: AttachmentBuilder[] = [***REMOVED***
+		const attachments: AttachmentBuilder[] = [];
 
 		if (members instanceof AttachmentBuilder) {
 			embed.addFields({ name: 'Members', value: 'Too many to display, see attached file.' });

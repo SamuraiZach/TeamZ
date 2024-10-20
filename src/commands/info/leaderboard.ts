@@ -17,7 +17,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.Number,
 			required: false
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		await interaction.deferReply();
@@ -50,7 +50,7 @@ export default class extends Command {
 			const { level } = user;
 			const exp = user.levelExp - user.curExp;
 
-			const cursor = { x: 0, y: i * (Leaderboard.userPillHeight + Leaderboard.margin) ***REMOVED***
+			const cursor = { x: 0, y: i * (Leaderboard.userPillHeight + Leaderboard.margin) };
 
 			ctx.fillStyle = Leaderboard.userPillColor;
 			this.roundedRect(ctx, cursor.x, cursor.y, Leaderboard.width, Leaderboard.userPillHeight, 10);

@@ -16,13 +16,13 @@ export abstract class Command {
 	extendedHelp?: string;
 	runInDM?: boolean = true;
 	runInGuild?: boolean = true;
-	options?: ApplicationCommandOptionData[***REMOVED***
+	options?: ApplicationCommandOptionData[];
 	type?: ApplicationCommandType;
 	permissions?: ApplicationCommandPermissions[] = [{
 		id: ROLES.VERIFIED,
 		type: ApplicationCommandPermissionType.Role,
 		permission: true
-	}***REMOVED***
+	}];
 
 	// functions
 	abstract run(interaction: CommandInteraction | MessageContextMenuCommandInteraction): Promise<InteractionResponse<boolean> | void | Message<boolean>>;

@@ -9,7 +9,7 @@ export default class extends Command {
 
 	// Never assume staff are not dumb (the reason this is so long)
 
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	description = 'Adds an assignment to a given course ID\'s assignment list';
 	runInDM = false;
 	options: ApplicationCommandOptionData[] =[
@@ -25,15 +25,15 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const course = interaction.options.getString('course');
 		const newAssignments = interaction.options.getString('newassignments').split('|').map(assign => assign.trim());
 		const entry: Course = await interaction.client.mongo.collection(DB.COURSES).findOne({ name: course });
 
-		const added: Array<string> = [***REMOVED***
-		const failed: Array<string> = [***REMOVED***
+		const added: Array<string> = [];
+		const failed: Array<string> = [];
 		newAssignments.forEach(assignment => {
 			if (entry.assignments.includes(assignment)) {
 				failed.push(assignment);
@@ -45,7 +45,7 @@ export default class extends Command {
 
 		interaction.client.mongo.collection(DB.COURSES).updateOne({ name: course }, { $set: { ...entry } });
 
-		const fields: Array<EmbedField> = [***REMOVED***
+		const fields: Array<EmbedField> = [];
 		if (added.length > 0) {
 			fields.push({
 				name: `Added assignment${added.length === 1 ? '' : 's'}`,

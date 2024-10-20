@@ -24,7 +24,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: false
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user: SageUser = await interaction.client.mongo.collection(DB.USERS).findOne({ discordId: interaction.user.id });
@@ -102,7 +102,7 @@ export default class extends Command {
 			type: 'private',
 			questionId,
 			messageLink
-		***REMOVED***
+		};
 
 		interaction.client.mongo.collection(DB.PVQ).insertOne(entry);
 

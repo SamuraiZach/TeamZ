@@ -16,7 +16,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: false
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const cmd = interaction.options.getString('cmd');
@@ -29,7 +29,7 @@ export default class extends Command {
 				return interaction.reply({ content: `**${cmd}** is not a valid command.`, ephemeral: true });
 			}
 
-			const fields: Array<EmbedField> = [***REMOVED***
+			const fields: Array<EmbedField> = [];
 
 			if (command.extendedHelp) {
 				fields.push({
@@ -83,7 +83,7 @@ export default class extends Command {
 		} else {
 			// if no command given
 			let helpStr = `You can do \`/help <command>\` to get more information about any command, or you can visit our website here:\n<${website}>\n`;
-			const categories: Array<string> = [***REMOVED***
+			const categories: Array<string> = [];
 			commands.forEach(command => {
 				if (!categories.includes(command.category)) categories.push(command.category);
 			});

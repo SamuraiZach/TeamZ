@@ -22,7 +22,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void | Message<boolean>> {
 		// Might take a few seconds to respond in rare cases
@@ -74,9 +74,9 @@ export default class extends Command {
 					canvasData.data[i + 1] = 49;
 					canvasData.data[i + 2] = 54;
 				} else {
-					canvasData.data[i] = 0xFF - canvasData.data[i***REMOVED***
-					canvasData.data[i + 1] = 0xFF - canvasData.data[i + 1***REMOVED***
-					canvasData.data[i + 2] = 0xFF - canvasData.data[i + 2***REMOVED***
+					canvasData.data[i] = 0xFF - canvasData.data[i];
+					canvasData.data[i + 1] = 0xFF - canvasData.data[i + 1];
+					canvasData.data[i + 2] = 0xFF - canvasData.data[i + 2];
 				}
 			}
 

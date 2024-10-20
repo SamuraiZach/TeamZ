@@ -20,21 +20,21 @@ async function checkPolls(bot: Client): Promise<void> {
 	const polls: Poll[] = await bot.mongo.collection<Poll>(DB.POLLS).find({
 		expires: { $lte: new Date() }
 	}).toArray();
-	const emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'***REMOVED***
+	const emotes = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
 
 	polls.forEach(async poll => {
 		const mdTimestamp = `<t:${Math.floor(Date.now() / 1000)}:R>`;
 
 		// figure out the winner and also put the results in a map for ease of use
 		const resultMap = new Map<string, number>();
-		let winners: PollResult[] = [***REMOVED***
+		let winners: PollResult[] = [];
 		poll.results.forEach(res => {
 			resultMap.set(res.option, res.users.length);
 			if (!winners[0]) {
-				winners = [res***REMOVED***
+				winners = [res];
 				return;
 			}
-			if (winners[0] && res.users.length > winners[0].users.length) winners = [res***REMOVED***
+			if (winners[0] && res.users.length > winners[0].users.length) winners = [res];
 			else if (res.users.length === winners[0].users.length) winners.push(res);
 		});
 
@@ -80,7 +80,7 @@ async function checkPolls(bot: Client): Promise<void> {
 			.addFields({ name: `Winner${winners.length === 1 ? '' : 's'}`, value: winMessage })
 			.addFields({ name: 'Original poll', value: `Click [here](${pollMsg.url}) to see the original poll.` })
 			.setColor('Random')
-	***REMOVED*** });
+		] });
 
 		await bot.mongo.collection<Poll>(DB.POLLS).findOneAndDelete(poll);
 	});
@@ -111,7 +111,7 @@ DMs closed. Please enable DMs in the future if you'd like to get private reminde
 			mode: reminder.mode,
 			repeat: reminder.repeat,
 			owner: reminder.owner
-		***REMOVED***
+		};
 
 		if (reminder.repeat === 'daily') {
 			newReminder.expires.setDate(reminder.expires.getDate() + 1);

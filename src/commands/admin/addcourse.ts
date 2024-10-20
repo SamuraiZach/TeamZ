@@ -10,7 +10,7 @@ export default class extends Command {
 
 	description = 'Creates a courses category and adds all necessary channels/roles.';
 	runInDM = false;
-	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [ADMIN_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'course',
@@ -61,8 +61,8 @@ export default class extends Command {
 		}, {
 			id: ROLES.MUTED,
 			deny: 'SendMessages'
-		}***REMOVED***
-		const staffPerms = [standardPerms[0], standardPerms[1], standardPerms[2]***REMOVED***
+		}];
+		const staffPerms = [standardPerms[0], standardPerms[1], standardPerms[2]];
 
 		//	create course category
 		const categoryChannel = await interaction.guild.channels.create({
@@ -108,7 +108,7 @@ export default class extends Command {
 				student: studentRole.id
 			},
 			assignments: ['hw1', 'hw2', 'hw3', 'hw4', 'hw5', 'lab1', 'lab2', 'lab3', 'lab4', 'lab5']
-		***REMOVED***
+		};
 		await interaction.client.mongo.collection(DB.COURSES).insertOne(newCourse);
 
 		await updateDropdowns(interaction);

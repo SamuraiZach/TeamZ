@@ -3,7 +3,7 @@ import { BOT, DB } from '@root/config';
 import { BOTMASTER_PERMS } from '@lib/permissions';
 import { Command } from '@lib/types/Command';
 
-const ACTIVITIES = ['Playing', 'Streaming', 'Listening', 'Watching', 'Competing'***REMOVED***
+const ACTIVITIES = ['Playing', 'Streaming', 'Listening', 'Watching', 'Competing'];
 
 export default class extends Command {
 
@@ -27,7 +27,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const bot = interaction.client;

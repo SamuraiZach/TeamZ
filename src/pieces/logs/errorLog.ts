@@ -16,7 +16,7 @@ export default register;
 async function generateLogEmbed(error: CommandError): Promise<Array<EmbedBuilder | AttachmentBuilder[]>> {
 	console.error(error);
 	const embed = new EmbedBuilder();
-	const attachments: AttachmentBuilder[] = [***REMOVED***
+	const attachments: AttachmentBuilder[] = [];
 
 	embed.setTitle(error.name ? error.name : error.toString());
 
@@ -55,5 +55,5 @@ Created By: ${error.interaction.member.user.username} (${error.interaction.membe
 ` });
 	}
 
-	return [embed, attachments***REMOVED***
+	return [embed, attachments];
 }

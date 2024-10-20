@@ -18,7 +18,7 @@ export default class extends Command {
 			interaction.reply({ content: 'You don\'t have any pending reminders!', ephemeral: true });
 		}
 
-		const embeds: Array<EmbedBuilder> = [***REMOVED***
+		const embeds: Array<EmbedBuilder> = [];
 
 		reminders.forEach((reminder, i) => {
 			if (i % 25 === 0) {

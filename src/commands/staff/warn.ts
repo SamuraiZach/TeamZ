@@ -25,8 +25,8 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: false
 		}
-***REMOVED***
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	]
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<Message> {
 		const target = await interaction.channel.messages.fetch(getMsgIdFromLink(interaction.options.getString('msglink')));

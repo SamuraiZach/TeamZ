@@ -3,7 +3,7 @@ import { ChatInputCommandInteraction, InteractionResponse } from 'discord.js';
 import { Command } from '@lib/types/Command';
 import { setTimeout } from 'timers';
 
-const COIN_FLIP = ['You got: Heads!', 'You got: Tails!'***REMOVED***
+const COIN_FLIP = ['You got: Heads!', 'You got: Tails!'];
 
 export default class extends Command {
 
@@ -11,7 +11,7 @@ export default class extends Command {
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		await interaction.reply('Flipping...');
-		const result = COIN_FLIP[Math.floor(Math.random() * COIN_FLIP.length)***REMOVED***
+		const result = COIN_FLIP[Math.floor(Math.random() * COIN_FLIP.length)];
 
 		setTimeout(() => {
 			if (result == COIN_FLIP[0]) {

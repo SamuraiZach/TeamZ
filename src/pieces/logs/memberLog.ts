@@ -19,7 +19,7 @@ async function processMemberAdd(member: GuildMember, channel: TextChannel): Prom
 async function processMemberRemove(member: GuildMember | PartialGuildMember, channel: TextChannel): Promise<void> {
 	if (member.guild.id !== GUILDS.MAIN) return;
 
-	const fields: Array<EmbedField> = [***REMOVED***
+	const fields: Array<EmbedField> = [];
 
 	if (member.user.createdAt) {
 		fields.push({
@@ -95,7 +95,7 @@ async function processMemberUpdate(oldMember: GuildMember | PartialGuildMember, 
 					value: oldMember.displayName,
 					inline: true
 				}
-		***REMOVED***)
+			])
 			.setColor('DarkPurple');
 	}
 
@@ -125,7 +125,7 @@ async function processMemberUpdate(oldMember: GuildMember | PartialGuildMember, 
 				? `${logEntry.executor.tag} (${logEntry.executor.id})`
 				: 'Moderator not found, check audit log manually if needed.',
 			inline: true
-		}***REMOVED***
+		}];
 
 		if (logEntry?.reason) {
 			fields.push({

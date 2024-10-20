@@ -15,7 +15,7 @@ export async function roleParser(msg: Message, input: string): Promise<Role> {
 	if (roleList.size > 1) {
 		throw 'Multiple roles with that name exist. Lookup by ID for role information.';
 	}
-	return [...roleList.values()][0***REMOVED***
+	return [...roleList.values()][0];
 }
 
 export async function userParser(msg: Message, input: string): Promise<GuildMember> {
@@ -40,7 +40,7 @@ export async function userParser(msg: Message, input: string): Promise<GuildMemb
 		throw `The query you entered matches \`${retMembers.map(member => member.user.tag).join('`, `')}\`. Try entering one of these tags to get a specific user.`;
 	}
 
-	return [...retMembers.values()][0***REMOVED***
+	return [...retMembers.values()][0];
 }
 
 export function channelParser(msg: Message, input: string): TextChannel {

@@ -4,7 +4,7 @@ import { ApplicationCommandOptionData, ApplicationCommandOptionType, Application
 	PresenceStatusData } from 'discord.js';
 import { Command } from '@lib/types/Command';
 
-const STATUSES = ['online', 'idle', 'dnd', 'invisible'***REMOVED***
+const STATUSES = ['online', 'idle', 'dnd', 'invisible'];
 export default class extends Command {
 
 	description = `Sets ${BOT.NAME}'s status.`;

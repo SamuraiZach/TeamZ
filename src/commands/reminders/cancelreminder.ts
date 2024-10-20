@@ -15,7 +15,7 @@ export default class extends Command {
 			required: true,
 			description: 'ID of the reminder to cancel'
 		}
-***REMOVED***
+	]
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const remindNum = interaction.options.getInteger('remindernumber') - 1;
@@ -23,7 +23,7 @@ export default class extends Command {
 		const reminders: Array<Reminder> = await interaction.client.mongo.collection(DB.REMINDERS)
 			.find({ owner: interaction.user.id }).toArray();
 		reminders.sort((a, b) => a.expires.valueOf() - b.expires.valueOf());
-		const reminder = reminders[remindNum***REMOVED***
+		const reminder = reminders[remindNum];
 
 		if (!reminder) {
 			interaction.reply({

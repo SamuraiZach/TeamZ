@@ -8,7 +8,7 @@ export default class extends Command {
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const response = await axios.get('https://zenquotes.io/api/random');
-		const quote = response.data[0***REMOVED***
+		const quote = response.data[0];
 		const responseEmbed = new EmbedBuilder()
 			.setColor('#3CD6A3')
 			.setTitle(`${quote.a}:`)

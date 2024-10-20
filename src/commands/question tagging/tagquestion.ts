@@ -21,7 +21,7 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
+	]
 
 	// never assume that students are not dumb
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
@@ -64,7 +64,7 @@ export default class extends Command {
 			course: course.name,
 			assignment: assignmentId,
 			header: header.length < 200 ? header : `${header.slice(0, 200)}...`
-		***REMOVED***
+		};
 
 		interaction.client.mongo.collection(DB.QTAGS).insertOne(newQuestion);
 		interaction.reply({ content: 'Added that message to the database.', ephemeral: true });

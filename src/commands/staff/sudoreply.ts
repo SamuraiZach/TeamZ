@@ -24,8 +24,8 @@ export default class extends Command {
 			type: ApplicationCommandOptionType.String,
 			required: true
 		}
-***REMOVED***
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	]
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void | Message<boolean>> {
 		const idArg = interaction.options.getString('questionid');
@@ -52,7 +52,7 @@ export default class extends Command {
 
 		if (question.type === 'private') {
 			const splitLink = question.messageLink.split('/');
-			const threadId = splitLink[splitLink.length - 2***REMOVED***
+			const threadId = splitLink[splitLink.length - 2];
 			return interaction.reply({
 				content: `\`/sudoreply\` has been depreciated for private questions. Please reply in thread <#${threadId}>.`,
 				ephemeral: true

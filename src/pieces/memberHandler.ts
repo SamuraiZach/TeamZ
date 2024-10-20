@@ -67,7 +67,7 @@ async function memberRemove(member: GuildMember | PartialGuildMember): Promise<v
 		curExp: FIRST_LEVEL,
 		levelExp: FIRST_LEVEL,
 		count: 0
-	***REMOVED***
+	};
 	dbMember.roles.push(ROLES.LEVEL_ONE);
 
 	await member.client.mongo.collection(DB.USERS).replaceOne({ discordId: member.id }, dbMember);

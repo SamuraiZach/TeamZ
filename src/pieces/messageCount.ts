@@ -6,13 +6,13 @@ import { calcNeededExp } from '@lib/utils/generalUtils';
 
 const startingColor = 80;
 const greenIncrement = 8;
-const maxGreen:[number, number, number] = [0, 255, 0***REMOVED***
+const maxGreen:[number, number, number] = [0, 255, 0];
 const maxLevel = 20;
 const countedChannelTypes = [
 	ChannelType.GuildText,
 	ChannelType.PublicThread,
 	ChannelType.PrivateThread
-***REMOVED***
+];
 
 async function register(bot: Client): Promise<void> {
 	bot.on('messageCreate', async msg => {
@@ -158,7 +158,7 @@ async function sendLevelPing(msg: Message, user: SageUser): Promise<Message> {
 }
 
 function createLevelRgb(level: number): [number, number, number] {
-	return [2, Math.min(startingColor + (level * greenIncrement), 255), 0***REMOVED***
+	return [2, Math.min(startingColor + (level * greenIncrement), 255), 0];
 }
 
 export default register;

@@ -7,7 +7,7 @@ import { Command } from '@lib/types/Command';
 
 export default class extends Command {
 
-	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS***REMOVED***
+	permissions: ApplicationCommandPermissions[] = [STAFF_PERMS, ADMIN_PERMS];
 	description = 'Emails you a link to the students blockpy submissions';
 	runInDM = false;
 	options: ApplicationCommandOptionData[] = [
@@ -17,7 +17,7 @@ export default class extends Command {
 			description: 'The member to look up',
 			required: true
 		}
-***REMOVED***;
+	];
 
 	async run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		const user = interaction.options.getUser('user');
