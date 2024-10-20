@@ -100,7 +100,9 @@ async function main() {
 			pii: false,
 			roles: [],
 			courses: [],
-			commandCount: []
+			commandUsage: [],
+			timeStamps: [],
+			responseTimes: []
 		};
 
 		if (course) {
