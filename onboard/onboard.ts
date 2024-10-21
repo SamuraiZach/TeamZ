@@ -100,14 +100,10 @@ async function main() {
 			isVerified: false,
 			pii: false,
 			roles: [],
-<<<<<<< HEAD
-			courses: []
-=======
 			courses: [],
 			commandUsage: [],
 			responseTimes: [],
 			timeStamps: []
->>>>>>> 8249a4a24249c039763c1060285722fa03a645ef
 		};
 
 		if (course) {
