@@ -31,7 +31,6 @@ export default class extends Command {
 				.setColor('#add8e6')
 				.setTitle('Message sent using Sage')
 				.setDescription(msg);
-			// eslint-disable-next-line no-extra-parens
 			dest.send({ embeds: [responseEmbed] });
 		} else {
 			return interaction.reply({ content: 'invalid input' });
