@@ -102,10 +102,23 @@ async function main() {
 			roles: [],
 			courses: [],
 			commandUsage: [],
-			responseTimes: 0,
+			responseTime: 0.0,
 			lastMessage: '',
 			timestampArray: []
 		};
+		/*
+			----- ADDED COMPONENTS TO USERS ----
+			commandUsage is an array that will be utilized as a dictionary of sorts which will count each use of specific commands that the user can use and input them into a count which can be
+		which can be used for activity metrics.
+
+			responseTime is a double and will be set as the delta or time difference between the last message and the current,
+		this is helpful for tracking activity based on how fast they respond or send messages between their channel activity and keeps a form of record.
+			lastMessage is a timestamp that will be utilized in the responseTime calculation such as given the timestamp of last and current the difference
+		will be used to set the value of responseTime
+
+			timestampArray is an array of array that will be set between time periods etc 12:00-12:59, 1:00-1:59,.... and the other axis of the multidimensional array
+		will be M, TUE, WED, THUR, FRI, SAT, SUN then at the cross section will be a count of the users message to track peak hours and of which days
+		*/
 
 		if (course) {
 			if (isStaff) {

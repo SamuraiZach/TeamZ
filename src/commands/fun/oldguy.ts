@@ -1,3 +1,6 @@
+/*
+The reason for this "command" is to learn how to reverse engineer how the bot reads and interprets the input and text
+*/
 import { ApplicationCommandOptionData, ApplicationCommandOptionType, ChatInputCommandInteraction, EmbedBuilder, InteractionResponse } from 'discord.js';
 import { Command } from '@lib/types/Command';
 
@@ -47,7 +50,7 @@ export default class extends Command {
 			.setColor('#000000')
 			.setTitle('The old guy says...')
 			.setDescription(response)
-			.setImage(`https://miro.medium.com/v2/resize:fit:1400/1*6QHa7KFFXMnF0fRnmuIh2A.jpeg`)
+			.setImage(`https://i.imgur.com/s4dTtBy.jpeg`)
 			.setFooter({ text: `${interaction.user.username} asked: ${question}` });
 		return interaction.reply({ embeds: [responseEmbed] });
 	}
