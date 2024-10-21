@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionData, ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, DMChannel, EmbedBuilder, InteractionResponse, TextChannel } from 'discord.js';
+import { ApplicationCommandOptionData, ApplicationCommandOptionType, ChannelType, ChatInputCommandInteraction, DMChannel, EmbedBuilder, InteractionResponse } from 'discord.js';
 import { Command } from '@lib/types/Command';
 
 
@@ -23,7 +23,7 @@ export default class extends Command {
 	]
 	run(interaction: ChatInputCommandInteraction): Promise<InteractionResponse<boolean> | void> {
 		let responseEmbed: EmbedBuilder;
-		const dest = interaction.options.getChannel('dest');
+		const dest = interaction.options.getUser('dest');
 		const msg = interaction.options.getString('msg');
 
 		if (dest && dest.type === ChannelType.DM) {
@@ -32,13 +32,11 @@ export default class extends Command {
 				.setTitle('Message sent using Sage')
 				.setDescription(msg);
 			// eslint-disable-next-line no-extra-parens
-			(dest as ).send({ embeds: [responseEmbed] });
+			dest.send({ embeds: [responseEmbed] });
 		} else {
 			return interaction.reply({ content: 'invalid input' });
 		}
 		return interaction.reply({ content: 'message sent', ephemeral: true });
-	}
-		return interaction.reply({ embeds: [responseEmbed] });
 	}
 
 }
