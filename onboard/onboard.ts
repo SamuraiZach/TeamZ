@@ -102,8 +102,9 @@ async function main() {
 			roles: [],
 			courses: [],
 			commandUsage: [],
-			responseTimes: [],
-			timeStamps: []
+			responseTimes: 0,
+			lastMessage: '',
+			timestampArray: []
 		};
 
 		if (course) {
