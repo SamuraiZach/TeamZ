@@ -15,7 +15,7 @@ export default class extends Command {
 	async run(): Promise<void> {
 		const feedbackChannel = '1290313285630951588';
 		this.client.on('messageCreate', async (message) => {
-			if (message.channel.id === feedbackChannel && message.author.id === '1290313285630951588') {
+			if (message.channel.id === feedbackChannel) {
 				try {
 					await message.react('👍');
 					await message.react('👎');
