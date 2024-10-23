@@ -11,7 +11,7 @@ export default class extends Command {
 		{
 			name: 'dest',
 			description: 'mention the user',
-			type: ApplicationCommandOptionType.User, 
+			type: ApplicationCommandOptionType.User,
 			required: true
 		},
 		{
@@ -26,7 +26,7 @@ export default class extends Command {
 		const dest = interaction.options.getUser('dest');
 		const msg = interaction.options.getString('msg');
 
-		if (dest && dest.type === ChannelType.DM) {
+		if (dest) {
 			responseEmbed = new EmbedBuilder()
 				.setColor('#add8e6')
 				.setTitle('Message sent using Sage')
