@@ -1,15 +1,16 @@
-import { EmbedBuilder, TextChannel, ChatInputCommandInteraction, ApplicationCommandOptionData, ApplicationCommandOptionType, InteractionResponse } from 'discord.js';
-import { BOT, CHANNELS, MAINTAINERS } from '@root/config';
 import { Command } from '@lib/types/Command';
+import { BOT, CHANNELS, MAINTAINERS } from '@root/config';
+import { EmbedBuilder, TextChannel, ChatInputCommandInteraction, ApplicationCommandOptionData, ApplicationCommandOptionType, InteractionResponse, Message } from 'discord.js';
+
 
 export default class extends Command {
 
-	description = `Provide feedback or bug reports about ${BOT.NAME}.`;
+	description = 'Command that allows users to vote on public feedback messages';
 
 	options: ApplicationCommandOptionData[] = [
 		{
 			name: 'feedback',
-			description: 'feedback to be sent to the admins',
+			description: 'feedback to be sent to the public feedback review channel',
 			type: ApplicationCommandOptionType.String,
 			required: true
 		},
@@ -34,7 +35,10 @@ export default class extends Command {
 			.setTimestamp();
 
 		if (file) embed.setImage(file.url);
-		feedbackChannel.send({ embeds: [embed] });
+		// react to the sent embed with the thumbs up and thumbs down emojis
+		const message = await feedbackChannel.send({ embeds: [embed] }) as Message;
+		await message.react('👍');
+		await message.react('👎');
 
 		return interaction.reply({ content: `Thanks! I've sent your feedback to ${MAINTAINERS}.`, ephemeral: true });
 	}
