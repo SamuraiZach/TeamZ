@@ -22,6 +22,8 @@ export default class extends Command {
 		}
 	]
 
+	// need to apply an error if the user uses the command outside of the feedback channels other than not respond
+
 	async run(interaction:ChatInputCommandInteraction): Promise<InteractionResponse<boolean>> {
 		const feedback = interaction.options.getString('feedback');
 		const file = interaction.options.getAttachment('file');
