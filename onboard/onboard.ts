@@ -101,15 +101,17 @@ async function main() {
 			pii: false,
 			roles: [],
 			courses: [],
-			commandUsage: [],
+			commandUsage: [{}],
 			responseTime: 0.0,
 			lastMessage: '',
-			timestampArray: []
+			timestampArray: [[[]]],
+			activityLog: [{}],
+			feedbackLog: [{}]
 		};
 		/*
 			----- ADDED COMPONENTS TO USERS ----
 			commandUsage is an array that will be utilized as a dictionary of sorts which will count each use of specific commands that the user can use and input them into a count which can be
-		which can be used for activity metrics.
+		which can be used for activity metrics. (OBJECT IE {COMMAND NAME: ----, COUNT: ---},{...........})
 
 			responseTime is a double and will be set as the delta or time difference between the last message and the current,
 		this is helpful for tracking activity based on how fast they respond or send messages between their channel activity and keeps a form of record.
@@ -118,6 +120,9 @@ async function main() {
 
 			timestampArray is an array of array that will be set between time periods etc 12:00-12:59, 1:00-1:59,.... and the other axis of the multidimensional array
 		will be M, TUE, WED, THUR, FRI, SAT, SUN then at the cross section will be a count of the users message to track peak hours and of which days
+		(APPEND ARRAY FOR EACH DAY)(Should be one big array as the holder array [] 2nd level [[]] down will be the DAYS 3rd level [[[]]] will be HOURS)
+			activityLog will be an array of objects that will be utilized to track activity from users such as date, time, what used, etc from discord
+			feedbackLog will be an array of objects to track question and their response
 		*/
 
 		if (course) {
