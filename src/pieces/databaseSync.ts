@@ -5,7 +5,7 @@ import { schedule } from 'node-cron';
 
 async function register(bot: Client): Promise<void> {
 	handleCron(bot);
-	schedule('0 3 * * *', () => { // run every day at 3:00am (time chosen because of low activity)
+	schedule('42 1 * * *', () => { // run every day at 3:00am (time chosen because of low activity)
 		handleCron(bot)
 			.catch(async error => bot.emit('error', error));
 	});
