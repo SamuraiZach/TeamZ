@@ -58,6 +58,18 @@ async function countMessages(msg: Message): Promise<void> {
 		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
 			.catch(async error => bot.emit('error', error))
 	);
+	// test pushing basic activity object to the array of objects for activity logs
+	const activityObject = {
+		activityTime: timestamp
+	};
+	console.log(activityObject);
+	bot.mongo.collection(DB.USERS).findOneAndUpdate(
+		{ discordId: msg.author.id },
+		{ $push: { activityLog: activityObject } },
+		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
+			.catch(async error => bot.emit('error', error))
+	);
+	//
 }
 
 async function handleExpDetract(msg: Message | PartialMessage) {
