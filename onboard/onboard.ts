@@ -6,6 +6,7 @@ import { MongoClient } from 'mongodb';
 import { SageUser } from '@lib/types/SageUser';
 import { Course } from '@lib/types/Course';
 import { BOT, DB, EMAIL, GUILDS, ROLES, FIRST_LEVEL } from '@root/config';
+import { time } from 'console';
 
 const MESSAGE = `<!DOCTYPE html>
 <html>
@@ -86,7 +87,9 @@ async function main() {
 		const hash = crypto.createHash('sha256').update(email).digest('base64').toString();
 
 		const entry: SageUser = await db.findOne({ email: email, hash: hash });
-
+		const timestamp = new Date().getDate();
+		const dayValue = new Date().toString().substring(0, 3);
+		const dayTime = new Date().getTime();
 		const newUser: SageUser = {
 			email: email,
 			hash: hash,
@@ -101,13 +104,26 @@ async function main() {
 			pii: false,
 			roles: [],
 			courses: [],
-			commandUsage: [{}],
+			commandUsage: [{
+				commandName: '',
+				commandDescription: '',
+				commandCount: ''
+			}],
 			responseTime: '',
 			lastMessage: '',
-			timestampArray: [[{}]],
-			activityLog: [{}],
-			feedbackLog: [{}]
+			timestampArray: [[dayValue, [dayTime,
+				{
+				}
+			]]],
+			activityLog: [{
+				activityTime: timestamp,
+				activityName: 'Onboard',
+				activityDescription: 'Joined Server',
+				activityType: 'join'
+			}],
+			feedbackLog: []
 		};
+		// ADDED MORE TO ACTIVITYLOG, TIMESTAMPARRAY, AND COMMANDUSAGE THEY ARE EXAMPLES OF HOW TO STORE (SET AS DEFAULTS RN)
 		/*
 			----- ADDED COMPONENTS TO USERS ----
 			commandUsage is an array that will be utilized as a dictionary of sorts which will count each use of specific commands that the user can use and input them into a count which can be
@@ -121,8 +137,11 @@ async function main() {
 			timestampArray is an array of array that will be set between time periods etc 12:00-12:59, 1:00-1:59,.... and the other axis of the multidimensional array
 			will be M, TUE, WED, THUR, FRI, SAT, SUN then at the cross section will be a count of the users message to track peak hours and of which days
 			(APPEND ARRAY FOR EACH DAY)(Should be one big array as the holder array [] 2nd level [[]] down will be the DAYS 3rd level [[[]]] will be HOURS)
+
+			TIMESTAMPARRAY (WILL BE TWO EMPTY ARRAY BUT WHEN MESSAGE ADD INFORMATION)
+
 			activityLog will be an array of objects that will be utilized to track activity from users such as date, time, what used, etc from discord
-			feedbackLog will be an array of objects to track question and their response
+			feedbackLog will be an array of objects to track question and their response (WILL BE EMPTY ARRAY BUT PUSH AN OBJECT)
 		*/
 
 		if (course) {

@@ -45,6 +45,8 @@ async function countMessages(msg: Message): Promise<void> {
 	}
 
 	const timestamp = new Date(msg.createdTimestamp).toString();
+	const dayValue = new Date().toString().substring(0, 3);
+	console.log(dayValue);
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
