@@ -102,9 +102,9 @@ async function main() {
 			roles: [],
 			courses: [],
 			commandUsage: [{}],
-			responseTime: 0.0,
+			responseTime: '',
 			lastMessage: '',
-			timestampArray: [[[]]],
+			timestampArray: [[{}]],
 			activityLog: [{}],
 			feedbackLog: [{}]
 		};

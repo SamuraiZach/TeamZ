@@ -44,10 +44,17 @@ async function countMessages(msg: Message): Promise<void> {
 		countInc++;
 	}
 
+	const timestamp = new Date(msg.createdTimestamp).toString();
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
 		{ $inc: { count: countInc, curExp: -1 } },
+		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
+			.catch(async error => bot.emit('error', error))
+	);
+	bot.mongo.collection(DB.USERS).findOneAndUpdate(
+		{ discordId: msg.author.id },
+		{ $set: { lastMessage: timestamp } },
 		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
 			.catch(async error => bot.emit('error', error))
 	);
