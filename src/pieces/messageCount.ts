@@ -57,9 +57,7 @@ async function countMessages(msg: Message): Promise<void> {
 	// this function will make sure lastMessage isnt empty we need to make a case for if it is empty blah blah blah
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id, lastMessage: { $ne: '' } },
-		{ $set: { lastMessage: timestamp } },
-		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
-			.catch(async error => bot.emit('error', error))
+		{ $set: { lastMessage: timestamp } }
 	);
 	// test pushing basic activity object to the array of objects for activity logs
 	const activityObject = {

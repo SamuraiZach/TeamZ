@@ -16,16 +16,28 @@ export default class extends Command {
 		// const user = interaction.options.getUser(interaction.user.globalName);
 		// console.log(user);
 		const sender: SageUser = await interaction.client.mongo.collection(DB.USERS).findOne({ discordId: interaction.user.id });
+		let info
+		= `Hello ${interaction.user}! 
+			
+		A couple of info we have on you!
+		`;
+		if (sender.commandUsage === null) {
+			info += `Unfortunately you havent used any commands yet! If you want to utilize commands, please use the /help to find help on commands`;
+		} else {
+			const usageMap = sender.commandUsage.map((obj) => `${obj.commandName} `);
+			info += `Wow! Seems like you do utilize commands! Here are some stats of your command use:
+				${usageMap}
+			`;
+		}
 		if (interaction.user) {
 			responseEmbed = new EmbedBuilder()
 				.setColor('#add8e6')
 				.setTitle('Generated Report:')
-				.setDescription(sender.discordId);
+				.setDescription(info);
 			interaction.user.send({ embeds: [responseEmbed] });
 		} else {
 			return interaction.reply({ content: interaction.user.username });
 		}
-		// FOR TESTING PURPOSES EPHEMERAL WILL BE SET TO FALSE!
 		return interaction.reply({ content: 'generated report!', ephemeral: true });
 	}
 
