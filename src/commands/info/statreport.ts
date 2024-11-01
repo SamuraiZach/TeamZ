@@ -26,7 +26,7 @@ export default class extends Command {
 			return interaction.reply({ content: interaction.user.username });
 		}
 		// FOR TESTING PURPOSES EPHEMERAL WILL BE SET TO FALSE!
-		return interaction.reply({ content: 'generated report!', ephemeral: false });
+		return interaction.reply({ content: 'generated report!', ephemeral: true });
 	}
 
 }

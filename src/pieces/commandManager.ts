@@ -287,17 +287,30 @@ async function runCommand(interaction: ChatInputCommandInteraction, bot: Client)
 		if (!success) return interaction.reply(failMessages[Math.floor(Math.random() * failMessages.length)]);
 
 		try {
-			// COMMAND USAGE PUSH OBJECT (NEEDS WORKING VERIFY IF ALREADY THERE)
-			const commandUsageObject = {
-				commandName: command.name,
-				commandDescription: command.description,
-				commandCount: 1
-			};
-			console.log(commandUsageObject);
-			console.log(interaction.user.id, '   ' , bot.user.id);
-			bot.mongo.collection(DB.USERS).findOneAndUpdate(
-				{ discordId: interaction.user.id },
-				{ $push: { commandUsage: commandUsageObject } });
+			// COMMAND USAGE MAKE SURE ITS A VALID POSITION AND WILL RETURN -1 IF NOT FOUND IN THE ARRAY OF OBJECTS
+			const returnCU = await bot.mongo.collection(DB.USERS).findOne({ discordId: interaction.user.id });
+			console.log(returnCU.commandUsage);
+			const arrayCU = returnCU.commandUsage;
+			const item = arrayCU.findIndex(i => i.commandName === command.name);
+			console.log(item);
+			if (item > -1) {
+				console.log('ENTER');
+				const itemObject = arrayCU[item];
+				console.log(itemObject);
+				itemObject.commandCount += 1;
+				arrayCU[item] = itemObject;
+				bot.mongo.collection(DB.USERS).update({ discordId: interaction.user.id }, { $set: { commandUsage: arrayCU } });
+			} else {
+				const commandUsageObject = {
+					commandName: command.name,
+					commandDescription: command.description,
+					commandCount: 1
+				};
+				bot.mongo.collection(DB.USERS).findOneAndUpdate(
+					{ discordId: interaction.user.id },
+					{ $push: { commandUsage: commandUsageObject } });
+			}
+			// console.log(interaction.user.id, '   ', bot.user.id);
 			// ////////////////////////////////////////////////////////////////////////////////
 			bot.commands.get(interaction.commandName).run(interaction)
 				?.catch(async (error: Error) => { // Idk if this is needed now, but keeping in case removing it breaks stuff...
