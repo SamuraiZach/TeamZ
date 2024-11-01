@@ -44,9 +44,8 @@ async function countMessages(msg: Message): Promise<void> {
 		countInc++;
 	}
 
-	const timestamp = new Date(msg.createdTimestamp).toString();
-	const dayValue = new Date().toString().substring(0, 3);
-	console.log(dayValue);
+	const timestamp = new Date().toString();
+	const currentEpoch = Date.now();
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
@@ -55,10 +54,19 @@ async function countMessages(msg: Message): Promise<void> {
 			.catch(async error => bot.emit('error', error))
 	);
 	// this function will make sure lastMessage isnt empty we need to make a case for if it is empty blah blah blah
-	bot.mongo.collection(DB.USERS).findOneAndUpdate(
-		{ discordId: msg.author.id, lastMessage: { $ne: '' } },
-		{ $set: { lastMessage: timestamp } }
-	);
+	const lastEmpty = await bot.mongo.collection(DB.USERS).findOne({ discordId: msg.author.id });
+	if (lastEmpty.lastMessage === -1) {
+		bot.mongo.collection(DB.USERS).findOneAndUpdate(
+			{ discordId: msg.author.id },
+			{ $set: { lastMessage: currentEpoch } }
+		);
+	} else {
+		const responseTime2 = (currentEpoch - lastEmpty.lastMessage) / 100;
+		bot.mongo.collection(DB.USERS).findOneAndUpdate(
+			{ discordId: msg.author.id },
+			{ $set: { lastMessage: currentEpoch, responseTime: responseTime2 } }
+		);
+	}
 	// test pushing basic activity object to the array of objects for activity logs
 	const activityObject = {
 		activityTime: timestamp
@@ -66,10 +74,7 @@ async function countMessages(msg: Message): Promise<void> {
 	console.log(activityObject);
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
-		{ $push: { activityLog: activityObject } },
-		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
-			.catch(async error => bot.emit('error', error))
-	);
+		{ $push: { activityLog: activityObject } });
 	//
 }
 

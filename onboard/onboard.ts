@@ -109,8 +109,8 @@ async function main() {
 				commandDescription: '',
 				commandCount: ''
 			}],
-			responseTime: '',
-			lastMessage: '',
+			responseTime: -1,
+			lastMessage: -1,
 			timestampArray: [[dayValue, [dayTime,
 				{
 				}
