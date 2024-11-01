@@ -287,6 +287,18 @@ async function runCommand(interaction: ChatInputCommandInteraction, bot: Client)
 		if (!success) return interaction.reply(failMessages[Math.floor(Math.random() * failMessages.length)]);
 
 		try {
+			// COMMAND USAGE PUSH OBJECT (NEEDS WORKING VERIFY IF ALREADY THERE)
+			const commandUsageObject = {
+				commandName: command.name,
+				commandDescription: command.description,
+				commandCount: 1
+			};
+			console.log(commandUsageObject);
+			console.log(interaction.user.id, '   ' , bot.user.id);
+			bot.mongo.collection(DB.USERS).findOneAndUpdate(
+				{ discordId: interaction.user.id },
+				{ $push: { commandUsage: commandUsageObject } });
+			// ////////////////////////////////////////////////////////////////////////////////
 			bot.commands.get(interaction.commandName).run(interaction)
 				?.catch(async (error: Error) => { // Idk if this is needed now, but keeping in case removing it breaks stuff...
 					bot.emit('error', new CommandError(error, interaction));
