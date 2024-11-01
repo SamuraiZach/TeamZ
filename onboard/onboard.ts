@@ -63,6 +63,7 @@ async function main() {
 	}
 
 	let isStaff: boolean;
+	
 
 	if (emails[0].toLowerCase() === 'staff') {
 		isStaff = true;
@@ -104,7 +105,9 @@ async function main() {
 			commandUsage: [],
 			responseTime: 0.0,
 			lastMessage: '',
-			timestampArray: []
+			timestampArray: [],
+			activityLevel: '',
+			isNewUser: true
 		};
 		/*
 			----- ADDED COMPONENTS TO USERS ----
@@ -118,6 +121,13 @@ async function main() {
 
 			timestampArray is an array of array that will be set between time periods etc 12:00-12:59, 1:00-1:59,.... and the other axis of the multidimensional array
 		will be M, TUE, WED, THUR, FRI, SAT, SUN then at the cross section will be a count of the users message to track peak hours and of which days
+		
+			activityLevel: activityLevel describes whether the user is active, mildly inactive, moderately inactive, or highly 
+			inactive which also takes into account whether or not the user is new. inactivity level will be incremented
+			if the command count for that week is 0.
+
+			isNewUser: describes whether the user is new, will set the user as new (true) when user is onboarded. 
+
 		*/
 
 		if (course) {
