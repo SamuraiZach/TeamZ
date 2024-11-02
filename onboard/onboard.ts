@@ -111,10 +111,7 @@ async function main() {
 			}],
 			responseTime: -1,
 			lastMessage: -1,
-			timestampArray: [[dayValue, [dayTime,
-				{
-				}
-			]]],
+			timestampArray: [],
 			activityLog: [{
 				activityTime: timestamp,
 				activityName: 'Onboard',
