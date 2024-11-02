@@ -2,8 +2,10 @@ import { Client } from 'discord.js';
 import { SageUser } from '../lib/types/SageUser';
 import { schedule } from 'node-cron';
 import { DB, GUILDS, ROLES } from '@root/config';
+import { MongoClient } from 'mongodb';
 
-async function registerJob(bot: Client): Promise<void> {
+
+async function register(bot: Client): Promise<void> {
 	handleInactivity(bot);
 	schedule('0 3 * * 0', () => { // this should be run every week
 		handleInactivity(bot)
@@ -56,10 +58,9 @@ async function handleInactivity(bot: Client) {
 
 		// After updating activity level for this week, wipe the message count
 		currentUser.messageCount = 0;
-
 		
 	})
 
 }
 
-export default registerJob;
+export default register;
