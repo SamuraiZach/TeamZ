@@ -6,34 +6,25 @@ import {
 import prettyMilliseconds from 'pretty-ms';
 import { DB } from '@root/config';
 
-interface Activity {
-	type: 'level' | 'command' | 'server' | 'class';
-	command: string | null;
-	level: number | null;
-	msg: string;
-}
-
 // TD: track level up
 export async function trackLevelUp(
 	member: GuildMember,
-	channelid: string
+	channel: TextChannel
 ): Promise<void> {
-	const channel = await member.guild.channels.fetch(channelid) as TextChannel;
-	if (channel === null) {
-		throw new Error('error, channel not found');
-	}
-
 	const UserCollection = member.client.mongo.collection(DB.USERS);
 	const user = await UserCollection.findOne(
-		{ discordId: member.id },
-		{ projection: { activityLog: 1 } }
+		{ discordId: member.id }
 	);
-	const activity: Activity = {
-		type: 'level',
-		command: null,
-		level: user.level,
-		msg: `leveled up to ${user.level}`
+	const activity = {
+		activityTime: prettyMilliseconds(
+			Date.now() - member.user.createdTimestamp,
+			{ verbose: true }
+		),
+		activityName: 'Level up',
+		activityDescription: 'User has leveled up',
+		activityType: 'messaging'
 	};
+
 	const embed = new EmbedBuilder()
 		.setTitle(`${member.user.tag} has just leveled up to ${user.level}.`)
 		.setThumbnail(member.user.avatarURL())
@@ -53,11 +44,8 @@ export async function trackLevelUp(
 	await UserCollection.updateOne(
 		{ discordId: member.id },
 		{
-			$set: { activityLog: [...user.activityLog, activity] }
+			$push: { activityLog: activity }
 		}
 	);
 	channel.send({ embeds: [embed] });
 }
-
-// TODO: classes
-// TODO: Other metrics later
