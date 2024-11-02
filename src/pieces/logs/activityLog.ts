@@ -1,8 +1,7 @@
 import {
 	GuildMember,
 	TextChannel,
-	EmbedBuilder,
-,
+	EmbedBuilder
 } from 'discord.js';
 import prettyMilliseconds from 'pretty-ms';
 import { DB } from '@root/config';
@@ -17,13 +16,13 @@ interface Activity {
 // TD: track level up
 export async function trackLevelUp(
 	member: GuildMember,
-	channelid: string 
+	channelid: string
 ): Promise<void> {
-	const channel = await member.guild.channels.fetch(channelid= channelid) as TextChannel;
-	if(channel === null){
-		console.log("error, channel not found");
-		return;
+	const channel = await member.guild.channels.fetch(channelid) as TextChannel;
+	if (channel === null) {
+		throw new Error('error, channel not found');
 	}
+
 	const UserCollection = member.client.mongo.collection(DB.USERS);
 	const user = await UserCollection.findOne(
 		{ discordId: member.id },
@@ -33,7 +32,7 @@ export async function trackLevelUp(
 		type: 'level',
 		command: null,
 		level: user.level,
-		msg: `leveled up to ${user.level}`,
+		msg: `leveled up to ${user.level}`
 	};
 	const embed = new EmbedBuilder()
 		.setTitle(`${member.user.tag} has just leveled up to ${user.level}.`)
@@ -45,7 +44,7 @@ export async function trackLevelUp(
 				`${prettyMilliseconds(
 					Date.now() - member.user.createdTimestamp,
 					{ verbose: true }
-				)} ago`,
+				)} ago`
 		})
 		.setColor('Aqua')
 		.setFooter({ text: `Discord ID: ${member.id}` })
@@ -54,7 +53,7 @@ export async function trackLevelUp(
 	await UserCollection.updateOne(
 		{ discordId: member.id },
 		{
-			$set: { activityLog: [...user.activityLog, activity] },
+			$set: { activityLog: [...user.activityLog, activity] }
 		}
 	);
 	channel.send({ embeds: [embed] });
