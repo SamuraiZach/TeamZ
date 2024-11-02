@@ -37,22 +37,25 @@ async function handleInactivity(bot: Client) {
 			{ $set: { isNewUser: isNew } });
 
 		if (isNew) {
-			if (currentUser.commandCount < 1 && currentUser.activityLevel === "active") {
+			if (currentUser.messageCount < 1 && currentUser.activityLevel === "active") {
 				currentUser.activityLevel = "mildly inactive";
-			} else if (currentUser.commandCount < 1 && currentUser.activityLevel === "mildly inactive") {
+			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === "mildly inactive") {
 				currentUser.activityLevel = "moderately inactive";
-			} else if (currentUser.commandCount < 1 && currentUser.activityLevel === "moderately inactive") {
+			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === "moderately inactive") {
 				currentUser.activityLevel = "highly inactive";
 			}
 		} else {
-			if (currentUser.commandCount < 5 && currentUser.activityLevel === "active") {
+			if (currentUser.messageCount < 5 && currentUser.activityLevel === "active") {
 				currentUser.activityLevel = "mildly inactive";
-			} else if (currentUser.commandCount < 5 && currentUser.activityLevel === "mildly inactive") {
+			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === "mildly inactive") {
 				currentUser.activityLevel = "moderately inactive";
-			} else if (currentUser.commandCount < 5 && currentUser.activityLevel === "moderately inactive") {
+			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === "moderately inactive") {
 				currentUser.activityLevel = "highly inactive";
 			}
 		}
+
+		// After updating activity level for this week, wipe the message count
+		currentUser.messageCount = 0;
 
 		
 	})

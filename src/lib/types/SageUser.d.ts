@@ -18,5 +18,5 @@ export interface SageUser {
 	timestampArray: Array<string>;
 	activityLevel: string;
 	isNewUser: boolean;
-	commandCount: number
+	messageCount: number
 }

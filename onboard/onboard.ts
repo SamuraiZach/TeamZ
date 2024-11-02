@@ -3,7 +3,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import { MongoClient } from 'mongodb';
-import { SageUser } from '@lib/types/SageUser';
+import { SageUser } from '/src/lib/types/SageUser';
 import { Course } from '@lib/types/Course';
 import { BOT, DB, EMAIL, GUILDS, ROLES, FIRST_LEVEL } from '@root/config';
 
@@ -106,8 +106,9 @@ async function main() {
 			responseTime: 0.0,
 			lastMessage: '',
 			timestampArray: [],
-			activityLevel: '',
-			isNewUser: true
+			activityLevel: 'active',
+			isNewUser: true,
+			messageCount: 0
 		};
 		/*
 			----- ADDED COMPONENTS TO USERS ----
@@ -127,6 +128,10 @@ async function main() {
 			if the command count for that week is 0.
 
 			isNewUser: describes whether the user is new, will set the user as new (true) when user is onboarded. 
+
+			messageCount: field to track the number of messages the user has sent for that week. if the number of messages
+			is less than threshold for that week, then the activity level will be moved up and the messageCount will be 
+			wiped weekly. 
 
 		*/
 
