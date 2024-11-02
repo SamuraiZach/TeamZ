@@ -12,6 +12,7 @@ async function registerJob(bot: Client): Promise<void> {
 }
 
 async function handleInactivity(bot: Client) {
+	console.log('inactivity run');
 	const guild = await bot.guilds.fetch(GUILDS.MAIN);
 	await guild.members.fetch();
 	guild.members.cache.forEach(async (member) => {
@@ -20,14 +21,14 @@ async function handleInactivity(bot: Client) {
 		const currentUser = await bot.mongo.collection<SageUser>(DB.USERS).findOne({ discordId: member.user.id });
 		if (!currentUser) return; // not in database (for some reason; maybe ID is not linked to a user document)
 
-		let joinDate = member.joinedAt;
+		const joinDate = member.joinedAt;
 		const currentDate = new Date();
 
 
 		const diffInTime = currentDate.getTime() - joinDate.getTime();
-        const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
+		const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
 
-		let isNew: boolean = true;
+		let isNew = true;
 		if (diffInDays > 30) {
 			isNew = false;
 		}
@@ -37,29 +38,27 @@ async function handleInactivity(bot: Client) {
 			{ $set: { isNewUser: isNew } });
 
 		if (isNew) {
-			if (currentUser.messageCount < 1 && currentUser.activityLevel === "active") {
-				currentUser.activityLevel = "mildly inactive";
-			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === "mildly inactive") {
-				currentUser.activityLevel = "moderately inactive";
-			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === "moderately inactive") {
-				currentUser.activityLevel = "highly inactive";
+			if (currentUser.messageCount < 1 && currentUser.activityLevel === 'active') {
+				currentUser.activityLevel = 'mildly inactive';
+			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === 'mildly inactive') {
+				currentUser.activityLevel = 'moderately inactive';
+			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === 'moderately inactive') {
+				currentUser.activityLevel = 'highly inactive';
 			}
 		} else {
-			if (currentUser.messageCount < 5 && currentUser.activityLevel === "active") {
-				currentUser.activityLevel = "mildly inactive";
-			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === "mildly inactive") {
-				currentUser.activityLevel = "moderately inactive";
-			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === "moderately inactive") {
-				currentUser.activityLevel = "highly inactive";
+			// eslint-disable-next-line no-lonely-if
+			if (currentUser.messageCount < 5 && currentUser.activityLevel === 'active') {
+				currentUser.activityLevel = 'mildly inactive';
+			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'mildly inactive') {
+				currentUser.activityLevel = 'moderately inactive';
+			} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'moderately inactive') {
+				currentUser.activityLevel = 'highly inactive';
 			}
 		}
 
 		// After updating activity level for this week, wipe the message count
 		currentUser.messageCount = 0;
-
-		
-	})
-
+	});
 }
 
 export default registerJob;
