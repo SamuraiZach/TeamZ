@@ -1,34 +1,42 @@
 import {
-	Client,
 	GuildMember,
 	TextChannel,
 	EmbedBuilder,
-	User,
-	PartialUser,
-	AuditLogEvent,
+,
 } from 'discord.js';
 import prettyMilliseconds from 'pretty-ms';
-import { DB, GUILDS, CHANNELS } from '@root/config';
+import { DB } from '@root/config';
 
-
-interface activity {
-	type: 'level' | 'command' | 'server' | 'class',
-	command: string | null,
-	level: number | null,
-	msg: string
+interface Activity {
+	type: 'level' | 'command' | 'server' | 'class';
+	command: string | null;
+	level: number | null;
+	msg: string;
 }
 
-
-
 // TD: track level up
-async function trackLevelUp(
+export async function trackLevelUp(
 	member: GuildMember,
-	channel: TextChannel
+	channelid: string 
 ): Promise<void> {
+	const channel = await member.guild.channels.fetch(channelid= channelid) as TextChannel;
+	if(channel === null){
+		console.log("error, channel not found");
+		return;
+	}
 	const UserCollection = member.client.mongo.collection(DB.USERS);
-	const activities = await UserCollection.findOne({ discordId: member.id }, { projection: { activityLog: 1 } });
+	const user = await UserCollection.findOne(
+		{ discordId: member.id },
+		{ projection: { activityLog: 1 } }
+	);
+	const activity: Activity = {
+		type: 'level',
+		command: null,
+		level: user.level,
+		msg: `leveled up to ${user.level}`,
+	};
 	const embed = new EmbedBuilder()
-		.setTitle(`${member.user.tag} has just leveled up to ${DB.USERS}.`)
+		.setTitle(`${member.user.tag} has just leveled up to ${user.level}.`)
 		.setThumbnail(member.user.avatarURL())
 		.addFields({
 			name: 'Level up',
@@ -43,11 +51,13 @@ async function trackLevelUp(
 		.setFooter({ text: `Discord ID: ${member.id}` })
 		.setTimestamp();
 
-	await UserCollection.updateOne({ discordId: member.id },{
-		$set:
-		{ activityLog: [...activities, {type: 'level', command: null,level: }]}
-	}  )
-	channel.send({ embeds=[embed] });
+	await UserCollection.updateOne(
+		{ discordId: member.id },
+		{
+			$set: { activityLog: [...user.activityLog, activity] },
+		}
+	);
+	channel.send({ embeds: [embed] });
 }
 
 // TODO: classes
