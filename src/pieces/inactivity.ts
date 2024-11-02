@@ -5,7 +5,7 @@ import { DB, GUILDS, ROLES } from '@root/config';
 
 async function registerJob(bot: Client): Promise<void> {
 	handleInactivity(bot);
-	schedule('0 3 * * *', () => { // this should be run every week
+	schedule('0 3 * * 0', () => { // this should be run every week
 		handleInactivity(bot)
 			.catch(async error => bot.emit('error', error));
 	});
