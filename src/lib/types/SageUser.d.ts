@@ -11,5 +11,12 @@ export interface SageUser {
 	isVerified: boolean;
 	isStaff: boolean;
 	roles: Array<string>;
-	courses: Array<string>
+	courses: Array<string>;
+	commandUsage: Array<string>;
+	responseTime: number;
+	lastMessage: string;
+	timestampArray: Array<string>;
+	activityLevel: string;
+	isNewUser: boolean;
+	commandCount: number
 }

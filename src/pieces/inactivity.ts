@@ -2,17 +2,16 @@ import { Client } from 'discord.js';
 import { SageUser } from '../lib/types/SageUser';
 import { schedule } from 'node-cron';
 import { DB, GUILDS, ROLES } from '@root/config';
-import { diffieHellman } from 'crypto';
 
 async function registerJob(bot: Client): Promise<void> {
-	checkOldUser(bot);
-	schedule('0 3 * * *', () => { // run every day at 3:00am (time chosen because of low activity)
-		checkOldUser(bot)
+	handleInactivity(bot);
+	schedule('0 3 * * *', () => { // this should be run every week
+		handleInactivity(bot)
 			.catch(async error => bot.emit('error', error));
 	});
 }
 
-async function checkOldUser(bot: Client) {
+async function handleInactivity(bot: Client) {
 	const guild = await bot.guilds.fetch(GUILDS.MAIN);
 	await guild.members.fetch();
 	guild.members.cache.forEach(async (member) => {
@@ -36,6 +35,26 @@ async function checkOldUser(bot: Client) {
 		await bot.mongo.collection(DB.USERS).updateOne(
 			{ discordId: member.id },
 			{ $set: { isNewUser: isNew } });
+
+		if (isNew) {
+			if (currentUser.commandCount < 1 && currentUser.activityLevel === "active") {
+				currentUser.activityLevel = "mildly inactive";
+			} else if (currentUser.commandCount < 1 && currentUser.activityLevel === "mildly inactive") {
+				currentUser.activityLevel = "moderately inactive";
+			} else if (currentUser.commandCount < 1 && currentUser.activityLevel === "moderately inactive") {
+				currentUser.activityLevel = "highly inactive";
+			}
+		} else {
+			if (currentUser.commandCount < 5 && currentUser.activityLevel === "active") {
+				currentUser.activityLevel = "mildly inactive";
+			} else if (currentUser.commandCount < 5 && currentUser.activityLevel === "mildly inactive") {
+				currentUser.activityLevel = "moderately inactive";
+			} else if (currentUser.commandCount < 5 && currentUser.activityLevel === "moderately inactive") {
+				currentUser.activityLevel = "highly inactive";
+			}
+		}
+
+		
 	})
 
 }
