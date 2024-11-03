@@ -47,7 +47,7 @@ async function countMessages(msg: Message): Promise<void> {
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
-		{ $inc: { count: countInc, curExp: -1, messageCount: countInc} }, //message count is wiped every week
+		{ $inc: { count: countInc, curExp: -1, messageCount: countInc} }, // message count is wiped every week
 		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
 			.catch(async error => bot.emit('error', error))
 	);
