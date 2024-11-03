@@ -23,6 +23,18 @@ async function handleCron(bot: Client) {
 		const newRoles = [];
 		const newCourses = [];
 
+		// marks users as new or old
+		let joinDate = member.joinedAt;
+		const currentDate = new Date();
+
+		const diffInTime = currentDate.getTime() - joinDate.getTime();
+        const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
+
+		let isNew: boolean = true;
+		if (diffInDays > 30) {
+			isNew = false;
+		}
+
 		member.roles.cache.forEach(role => {
 			if (role.name !== '@everyone') {
 				newRoles.push(role.id);
@@ -34,7 +46,7 @@ async function handleCron(bot: Client) {
 
 		await bot.mongo.collection(DB.USERS).updateOne(
 			{ discordId: member.id },
-			{ $set: { roles: newRoles, courses: newCourses } });
+			{ $set: { roles: newRoles, courses: newCourses, isNewUser: isNew } });
 	});
 }
 
