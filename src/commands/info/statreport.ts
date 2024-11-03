@@ -48,6 +48,12 @@ export default class extends Command {
 				${dayMap}
 			`;
 		}
+		info += `**MESSAGE STATS**`;
+		if (sender.lastMessage === -1) {
+			info += `\nUnfortunately our records show that you have no messages currently!`;
+		} else {
+			info += `\nYour last message was on: ${new Date(sender.lastMessage)} and response time is: ${sender.responseTime}`;
+		}
 		if (interaction.user) {
 			responseEmbed = new EmbedBuilder()
 				.setColor('#add8e6')

@@ -13,8 +13,8 @@ export interface SageUser {
 	roles: Array<string>;
 	courses: Array<string>;
 	commandUsage: Array<Record<string, number>>;
-	responseTime: string;
-	lastMessage: string;
+	responseTime: number;
+	lastMessage: number;
 	timestampArray: Array<Array<Record<string, number>>>;
 	activityLog: Array<Record<string, unknown>>;
 	feedbackLog: Array<Record<string, unknown>>;
