@@ -20,13 +20,32 @@ export default class extends Command {
 		= `Hello ${interaction.user}! 
 			
 		A couple of info we have on you!
-		`;
+		**COMMAND USAGE:**\n`;
 		if (sender.commandUsage === null) {
 			info += `Unfortunately you havent used any commands yet! If you want to utilize commands, please use the /help to find help on commands`;
 		} else {
-			const usageMap = sender.commandUsage.map((obj) => `${obj.commandName} `);
+			const usageMap = sender.commandUsage.map((obj) => `- ${obj.commandName}: ${obj.commandCount}`).join('\n');
 			info += `Wow! Seems like you do utilize commands! Here are some stats of your command use:
-				${usageMap}
+			${usageMap}`;
+		}
+		info += `\n**WEEKLY MESSAGE COUNT**`;
+		if (sender.timestampArray === null) {
+			info += `\nUnfortunately we don't have any chatter from you! If you want to see a report of your times type in any channel!`;
+		} else {
+			const ddd = sender.timestampArray.length;
+			console.log(ddd, 'ddd');
+			let dayMap = '';
+			for (let i = 0; i < ddd; i++) {
+				dayMap += `${sender.timestampArray[i][0]}: `;
+				const timeslength = sender.timestampArray[i].length;
+				for (let kk = 1; kk < timeslength; kk++) {
+					let timeCount = 0;
+					timeCount += sender.timestampArray[i][kk].messageCount;
+					dayMap += `${timeCount}\n`;
+				}
+			}
+			info += `\nWe have records of you chatting! Here the following are your total of sent per day:
+				${dayMap}
 			`;
 		}
 		if (interaction.user) {
