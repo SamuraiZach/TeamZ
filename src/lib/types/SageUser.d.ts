@@ -12,11 +12,13 @@ export interface SageUser {
 	isStaff: boolean;
 	roles: Array<string>;
 	courses: Array<string>;
-	commandUsage: Array<string>;
-	responseTime: number;
-	lastMessage: string;
-	timestampArray: Array<string>;
 	activityLevel: string;
 	isNewUser: boolean;
 	messageCount: number
+	commandUsage: Array<Record<string, number>>;
+	responseTime: number;
+	lastMessage: number;
+	timestampArray: Array<Array<Record<string, number>>>;
+	activityLog: Array<Record<string, unknown>>;
+	feedbackLog: Array<Record<string, unknown>>;
 }
