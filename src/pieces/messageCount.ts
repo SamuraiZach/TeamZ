@@ -3,7 +3,7 @@ import { DatabaseError } from '@lib/types/errors';
 import { CHANNELS, DB, ROLES, GUILDS } from '@root/config';
 import { SageUser } from '@lib/types/SageUser';
 import { calcNeededExp } from '@lib/utils/generalUtils';
-//import { trackLevelUp } from './activityTracking';
+// import { trackLevelUp } from './activityTracking';
 
 
 const startingColor = 80;
@@ -52,7 +52,7 @@ async function countMessages(msg: Message): Promise<void> {
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
-		{ $inc: { count: countInc, curExp: -1, messageCount: countInc} }, // message count is wiped every week
+		{ $inc: { count: countInc, curExp: -1, messageCount: countInc } }, // message count is wiped every week
 		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
 			.catch(async error => bot.emit('error', error))
 	);
@@ -182,7 +182,7 @@ async function handleLevelUp(err: Error, entry: SageUser, msg: Message): Promise
 		if (entry.level <= maxLevel) {
 			await msg.member.roles.remove(msg.member.roles.cache.find(r => r.name.startsWith('Level')), `${msg.author.username} leveled up.`);
 			msg.member.roles.add(addRole, `${msg.author.username} leveled up.`);
-			//trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
+			// trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
 		}
 
 		if (entry.level > maxLevel
@@ -198,7 +198,7 @@ async function handleLevelUp(err: Error, entry: SageUser, msg: Message): Promise
 		if (entry.level > maxLevel && !msg.member.roles.cache.find(r => r.name === 'Power User')) {
 			msg.member.roles.remove(msg.member.roles.cache.find(r => r.name.startsWith('Level')), `${msg.author.username} leveled up.`);
 			msg.member.roles.add(addRole, `${msg.author.username} leveled up.`);
-			//trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
+			// trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
 		}
 
 		msg.client.mongo.collection(DB.USERS).updateOne({ discordId: msg.author.id }, { $set: { ...entry } });
