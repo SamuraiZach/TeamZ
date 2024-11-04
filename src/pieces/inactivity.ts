@@ -4,7 +4,7 @@ import { Client } from 'discord.js';
 import { SageUser } from '../lib/types/SageUser';
 import { schedule } from 'node-cron';
 import { DB, GUILDS, ROLES } from '@root/config';
-
+// inactivity.ts should reset commandUsage, timestampArray, messageCount
 async function register(bot: Client): Promise<void> {
 	handleInactivity(bot);
 	schedule('0 3 * * 0', () => { // this should be run every week

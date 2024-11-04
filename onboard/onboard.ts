@@ -107,11 +107,7 @@ async function main() {
 			activityLevel: 'active',
 			isNewUser: true,
 			messageCount: 0,
-			commandUsage: [{
-				commandName: '',
-				commandDescription: '',
-				commandCount: ''
-			}],
+			commandUsage: [],
 			responseTime: -1,
 			lastMessage: -1,
 			timestampArray: [],
