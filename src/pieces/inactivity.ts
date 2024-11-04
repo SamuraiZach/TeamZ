@@ -1,3 +1,5 @@
+/* eslint-disable padded-blocks */
+/* eslint-disable no-lonely-if */
 import { Client } from 'discord.js';
 import { SageUser } from '../lib/types/SageUser';
 import { schedule } from 'node-cron';
@@ -32,22 +34,40 @@ async function handleInactivity(bot: Client) {
 				currentUser.activityLevel = 'moderately inactive';
 			} else if (currentUser.messageCount < 1 && currentUser.activityLevel === 'moderately inactive') {
 				currentUser.activityLevel = 'highly inactive';
+			} else { // message count is greater than threshold, going from inactive to active
+				if (currentUser.activityLevel !== 'active') {
+					currentUser.activityLevel = 'active';
+					const roleToGive = member.guild.roles.cache.get('1302772918249590794');
+					const roleToTake = member.guild.roles.cache.get('1302773007554449518');
+					member.roles.add(roleToGive);
+					member.roles.remove(roleToTake);
+					currentUser.roles.push('1302772918249590794');
+				}
+
 			}
-		} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'active') {
+		} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'active') { // user is old
 			const roleToGive = member.guild.roles.cache.get('1302773007554449518');
 			const roleToTake = member.guild.roles.cache.get('1302772918249590794');
 			member.roles.add(roleToGive);
 			member.roles.remove(roleToTake);
 			currentUser.activityLevel = 'mildly inactive';
+			currentUser.roles.push('1302773007554449518');
 		} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'mildly inactive') {
 			currentUser.activityLevel = 'moderately inactive';
 		} else if (currentUser.messageCount < 5 && currentUser.activityLevel === 'moderately inactive') {
 			currentUser.activityLevel = 'highly inactive';
+		} else { // not a new user and message count is greater than threshold: move user from inactive to active
+			if (currentUser.activityLevel !== 'active') {
+				currentUser.activityLevel = 'active';
+				const roleToGive = member.guild.roles.cache.get('1302772918249590794');
+				const roleToTake = member.guild.roles.cache.get('1302773007554449518');
+				member.roles.add(roleToGive);
+				member.roles.remove(roleToTake);
+				currentUser.roles.push('1302772918249590794');
+			}
 		}
-
 		// After updating activity level for this week, wipe the message count
 		currentUser.messageCount = 0;
 	});
 }
-
 export default register;
