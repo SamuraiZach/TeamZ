@@ -24,13 +24,13 @@ async function handleCron(bot: Client) {
 		const newCourses = [];
 
 		// marks users as new or old
-		let joinDate = member.joinedAt;
+		const joinDate = member.joinedAt;
 		const currentDate = new Date();
 
 		const diffInTime = currentDate.getTime() - joinDate.getTime();
-        const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
+		const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
 
-		let isNew: boolean = true;
+		let isNew = true;
 		if (diffInDays > 30) {
 			isNew = false;
 		}

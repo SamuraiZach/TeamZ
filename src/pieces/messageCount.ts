@@ -47,6 +47,7 @@ async function countMessages(msg: Message): Promise<void> {
 	}
 	const timestamp = new Date().toString();
 	const timestampDay = new Date().toString().substring(0, 3);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const timestampMinutes = new Date().toString().substring(0, 3);
 	const currentEpoch = Date.now();
 
