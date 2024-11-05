@@ -29,6 +29,9 @@ function handleBtnPress(bot: Client, i: ButtonInteraction) {
 	}
 }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// 1285236709780619395 is user id of the bot
+// collect description, their message choice, and the user id
+// just need to send it to the users monog db and stuff
 function handleUserReaction(bot: Client, description: string, choice: string, user: string) {
 	if (user !== '1285236709780619395') {
 		console.log('enter maybe');
