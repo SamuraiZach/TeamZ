@@ -9,7 +9,7 @@ async function register(bot: Client): Promise<void> {
 	});
 	// When creating a message this portion will run because it see's that message Reactions have been added and will trigger on the initial add of thumbs up and down
 	// need an if statement to verify the interaction just how the one above says i.isMessageComponent it could be the same but try different options
-	bot.on('messageReactionAdd', i => { console.log('see'); });
+	bot.on('messageReactionAdd', (reaction, user) => { console.log(reaction, '---', user); });
 }
 
 async function routeComponentInteraction(bot: Client, i: MessageComponentInteraction) {
