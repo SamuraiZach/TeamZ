@@ -45,7 +45,10 @@ async function countMessages(msg: Message): Promise<void> {
 	if (validChannel || validThread) {
 		countInc++;
 	}
-
+	const timestamp = new Date().toString();
+	const timestampDay = new Date().toString().substring(0, 3);
+	const timestampMinutes = new Date().toString().substring(0, 3);
+	const currentEpoch = Date.now();
 
 	bot.mongo.collection(DB.USERS).findOneAndUpdate(
 		{ discordId: msg.author.id },
@@ -53,6 +56,71 @@ async function countMessages(msg: Message): Promise<void> {
 		(err, { value }) => handleLevelUp(err, value as SageUser, msg)
 			.catch(async error => bot.emit('error', error))
 	);
+	// this function will make sure lastMessage isnt empty we need to make a case for if it is empty blah blah blah
+	const lastEmpty = await bot.mongo.collection(DB.USERS).findOne({ discordId: msg.author.id });
+	if (lastEmpty.lastMessage === -1) {
+		bot.mongo.collection(DB.USERS).findOneAndUpdate(
+			{ discordId: msg.author.id },
+			{ $set: { lastMessage: currentEpoch } }
+		);
+	} else {
+		const responseTime2 = (currentEpoch - lastEmpty.lastMessage) / 1000;
+		bot.mongo.collection(DB.USERS).findOneAndUpdate(
+			{ discordId: msg.author.id },
+			{ $set: { lastMessage: currentEpoch, responseTime: responseTime2 } }
+		);
+	}
+	// test pushing basic activity object to the array of objects for activity logs
+	const activityObject = {
+		activityTime: timestamp
+	};
+	console.log(activityObject);
+	bot.mongo.collection(DB.USERS).findOneAndUpdate(
+		{ discordId: msg.author.id },
+		{ $push: { activityLog: activityObject } });
+	//
+	// TIME STAMP HERE!!!!!!!!!!!!!!!!!!!!!!!!!
+	const returnUser = await bot.mongo.collection(DB.USERS).findOne({ discordId: msg.author.id });
+	console.log(returnUser.timestampArray);
+	const arrayTA = returnUser.timestampArray;
+	// WE GRAB THE TIME STAMP ARRAY
+	const findDay = arrayTA.findIndex(i => i[0] === timestampDay);
+	// DAY's WILL BE THE FIRST SLOT ON EACH ARRAY IF IT CANNOT FIND THE DAY IT WILL PUSH A NEW DAY
+	console.log('findDay: ', findDay);
+	const timeUTC = timestamp.substring(16, 18);
+	if (findDay === -1) {
+		console.log('couldnt find creating new: ', timestampDay);
+		const newArray = [timestampDay, {
+			timeSlot: timeUTC,
+			messageCount: 1
+		}];
+		bot.mongo.collection(DB.USERS).findOneAndUpdate(
+			{ discordId: msg.author.id },
+			{ $push: { timestampArray: newArray } });
+	// eslint-disable-next-line no-empty
+	} else {
+		console.log(arrayTA[findDay]);
+		console.log(timeUTC);
+		const findTimeSlot = arrayTA[findDay].findIndex(i => i.timeSlot === timeUTC);
+		console.log(findTimeSlot);
+		if (findTimeSlot === -1) {
+			const newSlot = {
+				timeSlot: timeUTC,
+				messageCount: 1
+			};
+			console.log('making new time slot');
+			arrayTA[findDay].push(newSlot);
+			bot.mongo.collection(DB.USERS).findOneAndUpdate(
+				{ discordId: msg.author.id },
+				{ $push: { timestampArray: arrayTA } });
+		} else {
+			const daytimeobject = arrayTA[findDay][findTimeSlot];
+			daytimeobject.messageCount++;
+			arrayTA[findDay][findTimeSlot] = daytimeobject;
+			bot.mongo.collection(DB.USERS).update({ discordId: msg.author.id }, { $set: { timestampArray: arrayTA } });
+		}
+	}
+	//
 }
 
 async function handleExpDetract(msg: Message | PartialMessage) {
