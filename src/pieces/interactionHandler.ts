@@ -1,7 +1,9 @@
-import { ButtonInteraction, Client, Message, MessageComponentInteraction, MessageReaction, User } from 'discord.js';
+import { ButtonInteraction, Client, Message, MessageComponentInteraction, MessageReaction, TextChannel, User } from 'discord.js';
 import { handleRpsOptionSelect } from '../commands/fun/rockpaperscissors';
 import { handlePollOptionSelect } from '../commands/fun/poll';
 import { SageInteractionType } from '@lib/types/InteractionType';
+import { DB } from '@root/config';
+import { SageUser } from '../lib/types/SageUser';
 
 async function register(bot: Client): Promise<void> {
 	bot.on('interactionCreate', i => {
@@ -32,9 +34,22 @@ function handleBtnPress(bot: Client, i: ButtonInteraction) {
 // 1285236709780619395 is user id of the bot
 // collect description, their message choice, and the user id
 // just need to send it to the users monog db and stuff
-function handleUserReaction(bot: Client, description: string, choice: string, user: string) {
+async function handleUserReaction(bot: Client, description: string, choice: string, user: string) {
 	if (user !== '1285236709780619395') {
 		console.log('enter maybe');
 		console.log(description, '   ', choice, '  ', user);
+		const userMongo = await bot.mongo.collection(DB.USERS).findOne({ discordId: user });
+		const feedbackArray = userMongo.feedbackLog;
+		const findExisting = feedbackArray.findIndex(i => i.feedbackQ === description);
+		if (findExisting === -1) {
+			const newFeedback = {
+				feedbackQ: description,
+				emojiChoice: choice
+			};
+			bot.mongo.collection(DB.USERS).findOneAndUpdate({ discordId: user }, { $push: { feedbackLog: newFeedback } });
+		} else {
+			feedbackArray[findExisting].emojiChoice = choice;
+			bot.mongo.collection(DB.USERS).findOneAndUpdate({ discordId: user }, { $set: { feedbackLog: feedbackArray } });
+		}
 	}
 }
