@@ -114,7 +114,7 @@ async function handleLevelUp(err: Error, entry: SageUser, msg: Message): Promise
 		if (entry.level <= maxLevel) {
 			await msg.member.roles.remove(msg.member.roles.cache.find(r => r.name.startsWith('Level')), `${msg.author.username} leveled up.`);
 			msg.member.roles.add(addRole, `${msg.author.username} leveled up.`);
-			trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
+			trackLevelUp(msg.member);
 		}
 
 		if (entry.level > maxLevel
@@ -130,7 +130,7 @@ async function handleLevelUp(err: Error, entry: SageUser, msg: Message): Promise
 		if (entry.level > maxLevel && !msg.member.roles.cache.find(r => r.name === 'Power User')) {
 			msg.member.roles.remove(msg.member.roles.cache.find(r => r.name.startsWith('Level')), `${msg.author.username} leveled up.`);
 			msg.member.roles.add(addRole, `${msg.author.username} leveled up.`);
-			trackLevelUp(msg.member, msg.guild.channels.cache.get('1293259236280893591') as TextChannel);
+			trackLevelUp(msg.member);
 		}
 
 		msg.client.mongo.collection(DB.USERS).updateOne({ discordId: msg.author.id }, { $set: { ...entry } });
